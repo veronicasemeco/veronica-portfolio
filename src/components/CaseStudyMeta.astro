@@ -1,0 +1,53 @@
+---
+interface Item {
+	label: string;
+	value: string;
+}
+
+interface Props {
+	items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<dl class="case-meta section--ruled">
+	{items.map((item) => (
+		<div>
+			<dt>{item.label}</dt>
+			<dd>{item.value}</dd>
+		</div>
+	))}
+</dl>
+
+<style>
+	.case-meta {
+		display: grid;
+		gap: var(--space-1);
+		grid-template-columns: 1fr;
+		margin: 0;
+		width: var(--layout-aside);
+	}
+
+	.case-meta div {
+		border-top: 0.5px solid var(--color-line-secondary);
+		display: grid;
+		gap: 10px;
+		grid-template-columns: 74px 1fr;
+		padding: var(--space-4) 0;
+	}
+
+	dt,
+	dd {
+		font-size: var(--text-xs);
+		line-height: 1.45;
+	}
+
+	dt {
+		font-weight: 500;
+	}
+
+	dd {
+		margin: 0;
+	}
+</style>

@@ -1,0 +1,63 @@
+---
+interface Props {
+	title: string;
+	imagePath: string;
+}
+
+const { title, imagePath } = Astro.props;
+---
+
+<section class="case-hero">
+	<div class="case-hero-content">
+		<h1 class="display">Redesigning</h1>
+		<p class="case-hero-title display">{title}</p>
+		<div class="case-hero-image" role="img" aria-label={`NAVIT platform hero image placeholder. Intended image path: ${imagePath}`}>
+			<span>Image placeholder</span>
+		</div>
+	</div>
+</section>
+
+<style>
+	.case-hero {
+		padding: var(--layout-section-y) var(--layout-page-padding) var(--space-11);
+	}
+
+	.case-hero-content {
+		display: grid;
+		gap: var(--space-8);
+	}
+
+	h1,
+	.case-hero-title {
+		font-size: var(--text-xxl);
+	}
+
+	.case-hero-title {
+		border-top: 1px solid var(--color-line-primary);
+		font-weight: 500;
+		text-align: right;
+	}
+
+	.case-hero-image {
+		align-items: center;
+		aspect-ratio: 1376 / 625;
+		background: linear-gradient(135deg, var(--color-button-label-primary), var(--color-line-primary));
+		color: var(--color-text-secondary);
+		display: flex;
+		font-size: var(--text-xs);
+		justify-content: center;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	@media (max-width: 760px) {
+		.case-hero-title {
+			font-weight: 400;
+			padding-top: var(--space-6);
+		}
+
+		.case-hero-image {
+			aspect-ratio: 360 / 485;
+		}
+	}
+</style>

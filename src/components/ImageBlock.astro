@@ -1,0 +1,92 @@
+---
+interface Props {
+	src: string;
+	alt: string;
+	caption?: string;
+	aspect?: "wide" | "shallow" | "dashboard" | "square" | "tall";
+	placeholder?: boolean;
+}
+
+const { src, alt, caption, aspect = "wide", placeholder = true } = Astro.props;
+---
+
+<figure class:list={["image-block", `image-block--${aspect}`]}>
+	{placeholder ? (
+		<div class="placeholder" role="img" aria-label={`${alt}. Intended image path: ${src}`}>
+			<span>Image placeholder</span>
+		</div>
+	) : (
+		<img src={src} alt={alt} loading="lazy" />
+	)}
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+	.image-block {
+		background: color-mix(in srgb, var(--color-line-secondary) 28%, var(--color-surface-primary));
+		border: 0.5px solid var(--color-line-secondary);
+		margin: 0;
+		overflow: hidden;
+		width: 100%;
+	}
+
+	.image-block--wide img,
+	.image-block--wide .placeholder {
+		aspect-ratio: 16 / 9;
+	}
+
+	.image-block--shallow img,
+	.image-block--shallow .placeholder {
+		aspect-ratio: 910 / 256;
+	}
+
+	.image-block--dashboard img,
+	.image-block--dashboard .placeholder {
+		aspect-ratio: 1376 / 630;
+	}
+
+	.image-block--square img,
+	.image-block--square .placeholder {
+		aspect-ratio: 1;
+	}
+
+	.image-block--tall img,
+	.image-block--tall .placeholder {
+		aspect-ratio: 4 / 5;
+	}
+
+	img,
+	.placeholder {
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--color-line-secondary) 22%, transparent),
+			color-mix(in srgb, var(--color-surface-primary) 92%, transparent)
+		);
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.placeholder {
+		align-items: center;
+		color: var(--color-text-secondary);
+		display: flex;
+		font-size: var(--text-xs);
+		justify-content: center;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	figcaption {
+		color: var(--color-text-secondary);
+		font-size: var(--text-xs);
+		line-height: var(--leading-tight);
+		padding: var(--space-3);
+	}
+
+	@media (max-width: 760px) {
+		.image-block--dashboard img,
+		.image-block--dashboard .placeholder {
+			aspect-ratio: 358 / 300;
+		}
+	}
+</style>

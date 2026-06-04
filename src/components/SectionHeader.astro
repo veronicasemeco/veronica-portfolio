@@ -1,0 +1,32 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="section section-header" aria-labelledby={title.toLowerCase().replaceAll(" ", "-")}>
+	<h2 id={title.toLowerCase().replaceAll(" ", "-")} class="display">{title}</h2>
+</section>
+
+<style>
+	.section-header {
+		min-height: 245px;
+		padding-bottom: 0;
+	}
+
+	h2 {
+		font-size: var(--text-xl);
+	}
+
+	@media (max-width: 760px) {
+		.section-header {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			min-height: 187px;
+			padding: var(--text-xxl) var(--layout-page-padding) var(--space-3);
+		}
+	}
+</style>

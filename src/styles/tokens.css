@@ -1,0 +1,65 @@
+:root {
+	--color-surface-primary: #f3f3fa;
+	--color-text-headline: #150e32;
+	--color-text-primary: #3d4160;
+	--color-text-secondary: #565b82;
+	--color-text-tertiary: #7177a4;
+	--color-line-primary: #949bcd;
+	--color-line-secondary: #b7b7cf;
+	--color-button-bg-primary: #150e32;
+	--color-button-label-primary: #f3f3fa;
+	--color-overlay-project-card: rgba(86, 91, 130, 0.46);
+
+	--font-display: "Lora", Georgia, "Times New Roman", serif;
+	--font-text: "Rubik", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+	--text-xs: 12px;
+	--text-s: 16px;
+	--text-m: 18px;
+	--text-mm: 24px;
+	--text-mobile-card-title: 36px;
+	--text-l: 48px;
+	--text-xl: 96px;
+	--text-xxl: 128px;
+
+	--leading-tight: 1.3;
+	--leading-body: 1.4;
+	--leading-ui: 1.5;
+
+	--space-0: 0;
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 20px;
+	--space-6: 24px;
+	--space-8: 32px;
+	--space-9: 36px;
+	--space-10: 40px;
+	--space-11: 44px;
+	--space-12: 120px;
+	--space-nav-gap: 40px;
+
+	--radius-button: 4px;
+	--radius-pill: 16px;
+
+	--layout-page-padding: 32px;
+	--layout-section-y: 120px;
+	--layout-card-y: 44px;
+	--layout-content-wide: 1440px;
+	--layout-measure: 912px;
+	--layout-aside: 331px;
+}
+
+@media (max-width: 760px) {
+	:root {
+		--text-m: 18px;
+		--text-l: 48px;
+		--text-xl: 48px;
+		--text-xxl: 48px;
+		--layout-page-padding: 16px;
+		--layout-section-y: 120px;
+		--layout-measure: 100%;
+		--layout-aside: 100%;
+	}
+}

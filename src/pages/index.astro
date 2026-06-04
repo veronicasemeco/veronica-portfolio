@@ -1,11 +1,254 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Veronica Semeco | Senior Product Designer"
+	description="Veronica Semeco is a Senior Product Designer working across research, UX strategy, product flows, and polished UI."
+>
+	<div class="page">
+			<SiteHeader />
+			<main id="main">
+				<section class="hero" aria-labelledby="hero-title">
+					<div class="hero-line">
+						<h1 id="hero-title" class="display">Complex products</h1>
+					</div>
+					<div class="hero-statement display">
+						<span aria-hidden="true">→</span>
+						<span>clear, shippable experiences.</span>
+					</div>
+					<p class="hero-copy">
+						I’m a Senior Product Designer working across research, UX strategy, messy product flows,
+						and polished UI, with recent work in SaaS, mobility benefits, e-commerce, and AI-assisted
+						prototyping.
+					</p>
+				</section>
+
+				<div id="work">
+					<SectionHeader title="Selected Work" />
+					<ProjectCard
+						title="Redesigning NAVIT’s Mobility Platform"
+						description="Helping a fast-moving startup turn fragmented mobility benefit flows into a clearer platform for employees and HR teams."
+						href="/work/navit-platform/"
+						hoverImage="/images/homepage/navit-platform-card.webp"
+						tags={["Design Foundations", "UX Strategy", "Mobile App + Dashboard", "Design Foundations"]}
+					/>
+					<ProjectCard
+						title="Building NAVIT’s first continuous research loop"
+						description="Creating a lightweight research system to bring end-user feedback into product decisions."
+						hoverImage="/images/homepage/navit-research-card.webp"
+						tags={["UX Research", "Research Ops", "Product Discovery", "SaaS"]}
+					/>
+					<ProjectCard
+						title="From catalog browsing to fit-guided shopping"
+						description="Moving from a generic swimwear catalog to a fit-guided shopping experience."
+						hoverImage="/images/homepage/haisa-card.webp"
+						tags={["E-commerce Strategy", "UX", "IA", "Product Data", "Shopify"]}
+					/>
+					<ProjectCard
+						title="Archive"
+						description="Earlier brand, web, and product work from agency, freelance, and startup projects."
+						href="https://www.veronicasemeco.com/more-case-studies"
+						interactive
+					/>
+				</div>
+
+				<section id="about" class="what-i-bring dark-section" aria-labelledby="what-i-bring-title">
+					<div class="what-i-bring-inner">
+						<h2 id="what-i-bring-title" class="display">What I bring</h2>
+						<div class="what-i-bring-content">
+							<p>
+								13+ years across UX, product, and brand, with recent work in B2B SaaS, mobility
+								benefits, e-commerce, and AI-supported design workflows.
+							</p>
+							<ul>
+								<li>Product design for complex flows</li>
+								<li>Lightweight research that informs decisions</li>
+								<li>UX strategy and product structure</li>
+								<li>Polished UI for apps, dashboards, and websites</li>
+								<li>Creative direction for digital products</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<section id="ai-lab" class="ai-lab section" aria-labelledby="ai-lab-title">
+					<a class="ai-lab-link display" href="#ai-lab" id="ai-lab-title">
+						<span>AI Lab</span>
+						<span aria-hidden="true">→</span>
+					</a>
+					<p>
+						Practical experiments in AI-assisted design work, from prototype prompts and coded tests to
+						research synthesis and data storytelling.
+					</p>
+				</section>
+			</main>
+			<SiteFooter />
+	</div>
 </Layout>
+
+<style>
+	.hero {
+		background: var(--color-surface-primary);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-8);
+		min-height: 970px;
+		padding: var(--layout-section-y) var(--layout-page-padding);
+	}
+
+	.hero-line h1 {
+		font-size: var(--text-xxl);
+	}
+
+	.hero-statement {
+		align-items: center;
+		border-top: 1px solid var(--color-line-primary);
+		display: flex;
+		font-size: var(--text-xxl);
+		font-weight: 500;
+		gap: var(--space-4);
+		justify-content: flex-end;
+		min-height: 363px;
+		text-align: right;
+	}
+
+	.hero-statement span:last-child {
+		max-width: 58.5rem;
+	}
+
+	.hero-copy {
+		border-top: 1px solid var(--color-line-primary);
+		color: var(--color-text-primary);
+		font-size: var(--text-s);
+		line-height: var(--leading-ui);
+		max-width: none;
+		padding-top: var(--space-8);
+		padding-right: max(0px, calc(100% - 70.75rem));
+		width: 100%;
+	}
+
+	.what-i-bring {
+		padding: var(--layout-section-y) var(--layout-page-padding);
+	}
+
+	.what-i-bring-inner {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-8);
+	}
+
+	.what-i-bring h2 {
+		font-size: var(--text-xl);
+	}
+
+	.what-i-bring-content {
+		border-top: 0.5px solid var(--color-line-secondary);
+		display: grid;
+		gap: var(--space-8);
+		grid-template-columns: minmax(0, 42rem) minmax(18rem, 28rem);
+		justify-content: space-between;
+		padding-top: var(--space-8);
+	}
+
+	.what-i-bring p,
+	.what-i-bring li {
+		color: var(--color-line-secondary);
+		font-size: var(--text-s);
+		line-height: var(--leading-ui);
+	}
+
+	.what-i-bring ul {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-8);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.ai-lab {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-8);
+		overflow: hidden;
+		transition: background-color 180ms ease-in-out;
+	}
+
+	.ai-lab-link {
+		align-items: center;
+		display: flex;
+		font-size: var(--text-l);
+		gap: var(--space-6);
+		transition: color 180ms ease-in-out, font-weight 180ms ease-in-out, gap 180ms ease-in-out;
+	}
+
+	.ai-lab-link:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: var(--space-2);
+	}
+
+	.ai-lab p {
+		color: var(--color-text-primary);
+		font-size: var(--text-m);
+		line-height: var(--leading-body);
+		max-width: var(--layout-measure);
+		transition: color 180ms ease-in-out;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.ai-lab:hover,
+		.ai-lab:has(.ai-lab-link:focus-visible) {
+			background: var(--color-button-bg-primary);
+		}
+
+		.ai-lab:hover .ai-lab-link,
+		.ai-lab:has(.ai-lab-link:focus-visible) .ai-lab-link {
+			color: var(--color-surface-primary);
+			font-weight: 500;
+			gap: var(--space-10);
+		}
+
+		.ai-lab:hover p,
+		.ai-lab:has(.ai-lab-link:focus-visible) p {
+			color: var(--color-surface-primary);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ai-lab,
+		.ai-lab-link,
+		.ai-lab p {
+			transition: none;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.hero {
+			gap: var(--space-8);
+			min-height: 638px;
+		}
+
+		.hero-statement {
+			align-items: flex-end;
+			flex-direction: row;
+			font-size: var(--text-l);
+			min-height: 193px;
+			padding-top: var(--space-6);
+			text-align: right;
+		}
+
+		.hero-copy {
+			padding-top: var(--space-6);
+		}
+
+		.what-i-bring-content {
+			gap: 48px;
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

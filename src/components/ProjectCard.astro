@@ -1,0 +1,178 @@
+---
+import Tag from "./Tag.astro";
+
+interface Props {
+	title: string;
+	description: string;
+	href?: string;
+	tags?: string[];
+	hoverImage?: string;
+	interactive?: boolean;
+}
+
+const { title, description, href = "#", tags = [], hoverImage, interactive = false } = Astro.props;
+const hoverImageStyle = hoverImage ? `--project-card-image: url("${hoverImage}");` : undefined;
+---
+
+<article class:list={["project-card", "section--ruled", (hoverImage || interactive) && "project-card--interactive", hoverImage && "project-card--with-image"]} style={hoverImageStyle}>
+	<a class="project-title" href={href}>
+		<span>{title}</span>
+		<span aria-hidden="true">→</span>
+	</a>
+	<p>{description}</p>
+	{tags.length > 0 && (
+		<ul class="tags" aria-label={`${title} tags`}>
+			{tags.map((tag) => (
+				<li><Tag label={tag} /></li>
+			))}
+		</ul>
+	)}
+</article>
+
+<style>
+	.project-card {
+		background: var(--color-surface-primary);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-8);
+		justify-content: center;
+		overflow: hidden;
+		padding: var(--layout-section-y) var(--layout-page-padding);
+		position: relative;
+		transition: background-color 180ms ease-in-out;
+	}
+
+	.project-card::before,
+	.project-card::after {
+		content: "";
+		inset: 0;
+		opacity: 0;
+		pointer-events: none;
+		position: absolute;
+		transition: opacity 180ms ease-in-out;
+	}
+
+	.project-card::before {
+		background-image: var(--project-card-image);
+		background-position: center;
+		background-size: cover;
+		transform: scale(1.01);
+	}
+
+	.project-card::after {
+		background: var(--color-overlay-project-card);
+	}
+
+	.project-card > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.project-title {
+		align-items: center;
+		color: var(--color-text-headline);
+		display: flex;
+		font-family: var(--font-display);
+		font-size: var(--text-l);
+		gap: var(--space-6);
+		line-height: var(--leading-tight);
+		text-decoration: none;
+		transition: color 180ms ease-in-out, font-weight 180ms ease-in-out, gap 180ms ease-in-out;
+		width: 100%;
+	}
+
+	.project-title:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: var(--space-2);
+	}
+
+	.project-title span:first-child {
+		max-width: min(100%, 72rem);
+	}
+
+	p {
+		color: var(--color-text-primary);
+		font-size: var(--text-m);
+		line-height: var(--leading-body);
+		max-width: var(--layout-measure);
+		transition: color 180ms ease-in-out;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.tags :global(.tag) {
+		transition: border-color 180ms ease-in-out, color 180ms ease-in-out;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.project-card--interactive:hover,
+		.project-card--interactive:has(.project-title:focus-visible) {
+			background: var(--color-button-bg-primary);
+		}
+
+		.project-card--with-image:hover::before,
+		.project-card--with-image:hover::after,
+		.project-card--with-image:has(.project-title:focus-visible)::before,
+		.project-card--with-image:has(.project-title:focus-visible)::after {
+			opacity: 1;
+		}
+
+		.project-card--interactive:hover .project-title,
+		.project-card--interactive:has(.project-title:focus-visible) .project-title {
+			color: var(--color-surface-primary);
+			font-weight: 500;
+			gap: var(--space-10);
+		}
+
+		.project-card--interactive:hover p,
+		.project-card--interactive:has(.project-title:focus-visible) p {
+			color: var(--color-surface-primary);
+		}
+
+		.project-card--interactive:hover .tags :global(.tag),
+		.project-card--interactive:has(.project-title:focus-visible) .tags :global(.tag) {
+			border-color: var(--color-line-primary);
+			color: var(--color-line-secondary);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.project-card,
+		.project-card::before,
+		.project-card::after,
+		.project-title,
+		p,
+		.tags :global(.tag) {
+			transition: none;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.project-card {
+			gap: var(--space-8);
+		}
+
+		.project-title {
+			align-items: flex-end;
+			font-size: var(--text-mobile-card-title);
+			gap: var(--space-3);
+			justify-content: space-between;
+		}
+
+		p {
+			font-size: var(--text-s);
+			line-height: var(--leading-ui);
+		}
+
+		.tags li:nth-child(n + 5) {
+			display: none;
+		}
+	}
+</style>
