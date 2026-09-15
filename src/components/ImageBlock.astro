@@ -9,7 +9,7 @@ interface Props {
 	placeholder?: boolean;
 }
 
-const { src, alt, caption, aspect = "wide", placeholder = true } = Astro.props;
+const { src, alt, caption, aspect = "wide", placeholder = false } = Astro.props;
 ---
 
 <figure class:list={["image-block", `image-block--${aspect}`]}>
