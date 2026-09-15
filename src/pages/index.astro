@@ -19,12 +19,16 @@ import SiteHeader from "../components/SiteHeader.astro";
 					</div>
 					<div class="hero-statement display">
 						<span aria-hidden="true">→</span>
-						<span>clear, shippable experiences.</span>
+						<span>clear experiences.</span>
 					</div>
 					<p class="hero-copy">
-						I’m a Senior Product Designer working across research, UX strategy, messy product flows,
-						and polished UI, with recent work in SaaS, mobility benefits, e-commerce, and AI-assisted
-						prototyping.
+						Complex products need more than good screens.
+The most challenging product work isn't usually visual. It's making sense of competing constraints, unclear requirements, stakeholder priorities, technical realities, and user needs.
+
+
+					</p>
+					<p>
+I help teams bring structure to that complexity.
 					</p>
 				</section>
 
@@ -40,12 +44,14 @@ import SiteHeader from "../components/SiteHeader.astro";
 					<ProjectCard
 						title="Building NAVIT’s first continuous research loop"
 						description="Creating a lightweight research system to bring end-user feedback into product decisions."
+						href="/work/navit-research-loop/"
 						hoverImage="/images/homepage/navit-research-card.webp"
 						tags={["UX Research", "Research Ops", "Product Discovery", "SaaS"]}
 					/>
 					<ProjectCard
 						title="From catalog browsing to fit-guided shopping"
 						description="Moving from a generic swimwear catalog to a fit-guided shopping experience."
+						href="/work/haisabikini/"
 						hoverImage="/images/homepage/haisa-card.webp"
 						tags={["E-commerce Strategy", "UX", "IA", "Product Data", "Shopify"]}
 					/>
@@ -59,7 +65,12 @@ import SiteHeader from "../components/SiteHeader.astro";
 
 				<section id="about" class="what-i-bring dark-section" aria-labelledby="what-i-bring-title">
 					<div class="what-i-bring-inner">
-						<h2 id="what-i-bring-title" class="display">What I bring</h2>
+						<h2 id="what-i-bring-title" class="display">
+							<a class="what-i-bring-link" href="/about/">
+								<span>What I bring</span>
+								<span aria-hidden="true">→</span>
+							</a>
+						</h2>
 						<div class="what-i-bring-content">
 							<p>
 								13+ years across UX, product, and brand, with recent work in B2B SaaS, mobility
@@ -77,7 +88,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 				</section>
 
 				<section id="ai-lab" class="ai-lab section" aria-labelledby="ai-lab-title">
-					<a class="ai-lab-link display" href="#ai-lab" id="ai-lab-title">
+					<a class="ai-lab-link display" href="/ai-lab/" id="ai-lab-title">
 						<span>AI Lab</span>
 						<span aria-hidden="true">→</span>
 					</a>
@@ -144,6 +155,25 @@ import SiteHeader from "../components/SiteHeader.astro";
 
 	.what-i-bring h2 {
 		font-size: var(--text-xl);
+	}
+
+	.what-i-bring-link {
+		align-items: center;
+		display: flex;
+		gap: var(--space-6);
+		transition: gap 180ms ease-in-out;
+	}
+
+	.what-i-bring-link:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: var(--space-2);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.what-i-bring-link:hover,
+		.what-i-bring-link:focus-visible {
+			gap: calc(var(--space-10) * 2);
+		}
 	}
 
 	.what-i-bring-content {
@@ -222,7 +252,8 @@ import SiteHeader from "../components/SiteHeader.astro";
 	@media (prefers-reduced-motion: reduce) {
 		.ai-lab,
 		.ai-lab-link,
-		.ai-lab p {
+		.ai-lab p,
+		.what-i-bring-link {
 			transition: none;
 		}
 	}

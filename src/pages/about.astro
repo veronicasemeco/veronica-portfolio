@@ -1,0 +1,356 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AboutTimeline from "../components/AboutTimeline.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+
+const timelineEntries = [
+	{
+		company: "Freelance",
+		role: "Product Designer & Creative Consultant",
+		location: "Berlin & Remote",
+		period: "2019 - Current",
+		description:
+			"I support teams across wellness, healthcare, greentech, and SaaS on early-stage and established products, focusing on product direction, UX strategy, and user research. My work spans discovery, research synthesis, and experience design, often stepping in to bring structure and momentum as products evolve or scale. This includes improving onboarding, clarifying complex flows, and building scalable design foundations.",
+	},
+	{
+		company: "NAVIT",
+		role: "Product Designer → Senior Product Designer",
+		location: "Berlin",
+		period: "2023 - 2025",
+		description:
+			"I led research and product improvements that raised NPS from 22.7 to 44.0, improved App Store ratings from 3.1 to 4.8, and reduced support volume across key workflows. I also initiated NAVIT’s design system and redesigned regulated product areas to improve clarity and usability.",
+	},
+	{
+		company: "FORMEL Skin",
+		role: "Senior UX/UI Designer",
+		location: "Berlin",
+		period: "2022 - 2023",
+		description:
+			"I co-led experimentation and onboarding improvements that lifted conversion by 11% and reduced churn by 12%. I also partnered with engineering to build a structured style guide that improved consistency and delivery speed.",
+	},
+	{
+		company: "Wunderman Thompson, WPP",
+		role: "Design Director",
+		location: "New York City",
+		period: "2017 - 2019",
+		description:
+			"I led creative work across multiple drug indications, shaping educational tools and supporting major product launches. Working within FDA-regulated environments strengthened my ability to simplify complexity and align diverse stakeholders: foundations for my product work today.",
+	},
+	{
+		company: "Saatchi & Saatchi, Publicis Groupe",
+		role: "Art Director → Senior Art Director",
+		location: "New York City",
+		period: "2014 - 2017",
+		description:
+			"I led design for global healthcare launches and digital tools, navigating strict regulatory workflows. These years built my skills in stakeholder alignment, systems thinking, and leading creative teams.",
+	},
+	{
+		company: "Leibowitz Branding & Design",
+		role: "Graphic Designer → Art Director",
+		location: "New York City",
+		period: "2007 - 2014",
+		description:
+			"I created brand systems for clients across healthcare, finance, and telecom. Notably, I restructured TIAA’s collateral system from 366 fragmented pieces into 29 scalable templates, an early lesson in design systems and operational clarity.",
+	},
+];
+
+const principles = [
+	{
+		title: "Clarifying across teams",
+		description:
+			"I make complex topics clear to different stakeholders, reducing noise and building alignment that keeps projects moving with shared understanding.",
+	},
+	{
+		title: "Structured, outcome-led thinking",
+		description:
+			"I approach problems methodically, connecting design decisions to measurable outcomes that drive adoption, retention, and satisfaction.",
+	},
+	{
+		title: "Ownership in ambiguous contexts",
+		description:
+			"I take ownership and deliver reliably, even in changing or ambiguous contexts, staying calm under pressure, anticipating needs, and stepping up beyond my role to keep momentum.",
+	},
+	{
+		title: "Collaborative leadership and mentoring",
+		description:
+			"I build trust and inclusion within teams, listen deeply, and support others’ growth through clear communication and thoughtful feedback.",
+	},
+];
+
+const teams = [
+	"NAVIT",
+	"FORMEL Skin",
+	"Pfizer",
+	"TIAA",
+	"Felmo",
+	"Novartis",
+	"Wunderman Thompson",
+	"Saatchi & Saatchi Wellness",
+	"The Parnell Plan",
+];
+---
+
+<Layout
+	title="About | Veronica Semeco"
+	description="About Veronica Semeco, Senior Product Designer."
+>
+	<div class="page">
+		<SiteHeader />
+		<main id="main">
+			<section class="about-intro">
+				<h1 class="display">
+					Complex products need more than good screens.
+				</h1>
+				<div class="intro-copy">
+					<p>
+						I’m a Senior Product Designer working across research, UX strategy, product flows, and polished UI, with recent work in SaaS, mobility benefits, e-commerce, and AI-assisted prototyping.
+					</p>
+					
+					<p>
+					I’ve worked across agencies, startups, and in-house product teams on products where the challenge was rarely just the interface. It was understanding the system around it: user needs, business priorities, technical constraints, internal workflows, and the trade-offs required to move forward.</p>
+				<p>
+						I help teams turn complexity into clear, shippable product experiences.</p>
+				</div>
+			</section>
+
+			<section class="career-section section--ruled" aria-label="Career timeline">
+				<AboutTimeline entries={timelineEntries} />
+			</section>
+
+			<section class="work-section section--ruled" aria-labelledby="work-heading">
+				<h2 id="work-heading" class="display">How I work</h2>
+				<div class="principles">
+					{principles.map((principle) => (
+						<article class="principle">
+							<h3>{principle.title}</h3>
+							<p>{principle.description}</p>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<section class="teams-section section--ruled" aria-labelledby="teams-heading">
+				<h2 id="teams-heading" class="display">Teams I’ve worked with</h2>
+				<ul class="logo-grid">
+					{teams.map((team) => (
+						<li>{team}</li>
+					))}
+				</ul>
+			</section>
+
+			<section class="personal-section section--ruled" aria-labelledby="personal-heading">
+				<div
+					class="portrait-placeholder"
+					aria-label="Portrait placeholder for Veronica Semeco"
+					role="img"
+				></div>
+				<div class="personal-copy">
+					<h2 id="personal-heading" class="display">Things that shape me</h2>
+					<p>
+						I was born and raised in Venezuela, lived for many years in the U.S.,
+						and now call Germany home. Outside of work, I’m a long-distance
+						runner, a thru-hike fan, and someone who loves learning new crafts.
+						These things teach me patience, adaptability, and a steady, long-view
+						approach: the same way I show up in my work.
+					</p>
+				</div>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>
+
+<style>
+	.about-intro,
+	.career-section,
+	.work-section,
+	.teams-section,
+	.personal-section {
+		padding: var(--layout-section-y) var(--layout-page-padding);
+	}
+
+	.about-intro {
+		display: grid;
+		gap: var(--space-10);
+	}
+
+	h1 {
+		font-size: var(--text-xl);
+		max-width: 1180px;
+	}
+
+	.intro-copy,
+	.personal-copy,
+	.principles {
+		display: grid;
+		gap: var(--space-6);
+	}
+
+	.intro-copy {
+		max-width: var(--layout-measure);
+	}
+
+	.intro-copy p,
+	.personal-copy p {
+		color: var(--color-text-primary);
+		font-size: var(--text-m);
+		line-height: var(--leading-body);
+	}
+
+	.career-section {
+		display: grid;
+		gap: var(--space-11);
+	}
+
+	.career-section h2,
+	.work-section h2,
+	.teams-section h2,
+	.personal-section h2 {
+		font-size: var(--text-l);
+	}
+
+	.work-section {
+		display: grid;
+		gap: var(--space-10);
+		grid-template-columns: minmax(180px, var(--layout-aside)) minmax(0, 1fr);
+	}
+
+	.principle {
+		border-top: 0.5px solid var(--color-line-secondary);
+		display: grid;
+		gap: var(--space-4);
+		padding-top: var(--space-6);
+	}
+
+	.principle:first-child {
+		border-top: 0;
+		padding-top: 0;
+	}
+
+	.principle h3 {
+		color: var(--color-text-headline);
+		font-family: var(--font-text);
+		font-size: var(--text-s);
+		font-weight: 500;
+		line-height: var(--leading-tight);
+	}
+
+	.principle p {
+		color: var(--color-text-primary);
+		font-size: var(--text-s);
+		line-height: var(--leading-ui);
+		max-width: var(--layout-measure);
+	}
+
+	.teams-section {
+		display: grid;
+		gap: var(--space-10);
+	}
+
+	.logo-grid {
+		display: grid;
+		gap: 0;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.logo-grid li {
+		align-items: center;
+		border-top: 0.5px solid var(--color-line-secondary);
+		color: var(--color-text-secondary);
+		display: flex;
+		font-size: var(--text-s);
+		justify-content: center;
+		line-height: var(--leading-tight);
+		min-height: 112px;
+		padding: var(--space-6);
+		text-align: center;
+	}
+
+	.logo-grid li:nth-child(-n + 3) {
+		border-top: 0;
+	}
+
+	.personal-section {
+		display: grid;
+		gap: var(--space-10);
+		grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
+	}
+
+	.portrait-placeholder {
+		aspect-ratio: 4 / 5;
+		background:
+			linear-gradient(
+				rgba(243, 243, 250, 0.32),
+				rgba(243, 243, 250, 0.32)
+			),
+			url("/images/about/veronica-portrait.webp"),
+			color-mix(in srgb, var(--color-line-secondary) 42%, var(--color-surface-primary));
+		background-position: center;
+		background-size: cover;
+		border: 0.5px solid var(--color-line-secondary);
+		max-width: 360px;
+		min-height: 320px;
+	}
+
+	.personal-copy {
+		align-content: center;
+		max-width: var(--layout-measure);
+	}
+
+	@media (max-width: 900px) {
+		.work-section,
+		.personal-section {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.about-intro,
+		.career-section,
+		.work-section,
+		.teams-section,
+		.personal-section {
+			padding: var(--layout-section-y) var(--layout-page-padding);
+		}
+
+		h1,
+		.career-section h2,
+		.work-section h2,
+		.teams-section h2,
+		.personal-section h2 {
+			font-size: var(--text-l);
+		}
+
+		.intro-copy p,
+		.personal-copy p {
+			font-size: var(--text-s);
+			line-height: var(--leading-ui);
+		}
+
+		.logo-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.logo-grid li,
+		.logo-grid li:nth-child(-n + 3) {
+			border-top: 0.5px solid var(--color-line-secondary);
+			justify-content: flex-start;
+			min-height: 72px;
+			padding: var(--space-5) 0;
+			text-align: left;
+		}
+
+		.logo-grid li:first-child {
+			border-top: 0;
+		}
+
+		.portrait-placeholder {
+			max-width: none;
+			min-height: 360px;
+		}
+	}
+</style>

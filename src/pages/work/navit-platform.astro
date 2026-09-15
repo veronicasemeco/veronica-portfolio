@@ -6,6 +6,7 @@ import CaseStudyMeta from "../../components/CaseStudyMeta.astro";
 import ImageBlock from "../../components/ImageBlock.astro";
 import KeyDecision from "../../components/KeyDecision.astro";
 import ResultCards from "../../components/ResultCards.astro";
+import CaseStudyNextLink from "../../components/CaseStudyNextLink.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 ---
@@ -41,7 +42,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 
 					<section class="intro-card">
 						<h2 class="display">Impact</h2>
-						<ImageBlock src="/images/navit/navit-impact.png" alt="NAVIT impact overview" aspect="shallow" />
+						<ImageBlock src="/images/navit/navit-impact.png" alt="NAVIT impact overview" aspect="shallow" placeholder={false} />
 						<ResultCards
 							results={[
 								{ label: "Multi-product activation increased", detail: "31% → 49% after the allocation redesign." },
@@ -99,9 +100,8 @@ import SiteHeader from "../../components/SiteHeader.astro";
 								<li>Designing major product launches such as Deutschlandticket and Bike Leasing.</li>
 								<li>Improving HR/admin dashboard workflows for benefit configuration, reimbursements, payments, payroll-related tasks, and reporting.</li>
 								<li>Building shared design foundations with a junior designer and Engineering, including Figma/MUI alignment.</li>
-								<li>Creating a lightweight feedback loop between Product, Support, Customer Success, and users.</li>
+								<li>Creating a <a href="/work/navit-research-loop/"><strong>lightweight feedback loop</strong></a> between Product, Support, Customer Success, and users.</li>
 							</ul>
-							<p>The continuous research practice became its own body of work, covered in a separate case study.</p>
 						</div>
 					</section>
 				</section>
@@ -109,27 +109,30 @@ import SiteHeader from "../../components/SiteHeader.astro";
 				<section class="decisions">
 					<KeyDecision
 						number={1}
-						title="Show the benefit before asking users to configure it"
+						title="Onboarding: show the benefit before configuration"
 						paragraphs={[
 							"The old onboarding mixed education, setup, and product selection too early. Users were asked to make choices before they understood what their employer provided or which product rules applied.",
 							"I reworked the activation flow so users first saw their available mobility budget and what it could be used for. Then they were guided into allocation.",
 						]}
-						changes={["Reduced overloaded onboarding screens.", "Made the employer-provided benefit visible earlier.", "Merged product education and product selection into a clearer flow.", "Added language selection before full onboarding.", "Helped users reach action with less explanation from Support."]}
+					
 						imagePath="/images/navit/navit-onboarding-benefits.png"
 					/>
 					<KeyDecision
 						number={2}
-						title="Remove misleading product metaphors"
+						title="Remove the credit card metaphor"
 						paragraphs={[
-							"The app used a card metaphor across different benefits. This made products feel equivalent, even when they worked differently.",
+							"The app used a credit card metaphor across different benefits. This made products feel equal, even when they worked differently.",
 							"That created the wrong mental model. A user might assume that public transport, reimbursements, bike leasing, and mobility cards all behaved like a prepaid card. In reality, each product had different rules, timing, reimbursement states, and operational constraints.",
 							"I moved the experience away from one generic card metaphor and toward product-specific logic.",
 						]}
-						changes={["Removed misleading UI patterns that implied all benefits worked the same way.", "Made different product types easier to distinguish.", "Clarified where a product required allocation, reimbursement, purchase, approval, or external steps.", "Reduced false expectations around what a user could do with each benefit."]}
+						
 						imagePath="/images/navit/navit-card-metaphor-before-after.png"
 					>
-						<Callout slot="callout" text="“I don’t know why anyone would choose public transit or bike leasing if the red card includes everything.”" />
-					</KeyDecision>
+						<Callout
+	slot="callout"
+	text={'“I don’t know why anyone would choose public transit or bike leasing if the red card includes everything.”\n\n— New user, reacting to the old card metaphor'}
+	/>
+</KeyDecision>
 					<KeyDecision
 						number={3}
 						title="Make budget changes predictable"
@@ -138,7 +141,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 							"I redesigned allocation around state logic: what is active now, what changes next month, and how those changes should be confirmed.",
 							"The new flow separated current and upcoming states, and added confirmation screens and inline policy reminders so users understood when changes took effect.",
 						]}
-						changes={["Introduced “Current” and “Next” allocation views.", "Added confirmation screens for upcoming changes.", "Made company policy reminders visible in context.", "Moved allocation into a more discoverable place in the navigation.", "Increased multi-product activation from 31% to 49% after the allocation redesign."]}
+					
 						imagePath="/images/navit/navit-allocation-current-next.png"
 					/>
 					<KeyDecision
@@ -148,19 +151,22 @@ import SiteHeader from "../../components/SiteHeader.astro";
 							"Users told Support they did not understand whether a number showed what they had left, what they had received, or what they had already used.",
 							"I restructured balance and transaction history around clearer financial states: available, used, added, spent, reimbursed, and upcoming changes.",
 						]}
-						changes={["Updated balance logic to show the available amount per product.", "Redesigned transaction entries to distinguish money added, spent, or reimbursed.", "Connected allocation and transaction history so users could understand how product rules affected their balance.", "Reduced support tickets related to the reimbursement modal by roughly 50% over time."]}
+						
 						imagePath="/images/navit/navit-history-balance-logic.png"
 					>
-						<Callout slot="callout" text="“I’m not sure if the number at the top is what I have left, what I got, or what I’ve already used. It’s different every time.”" />
+						<Callout
+	slot="callout"
+	text={'“I’m not sure if the number at the top is what I have left, what I got, or what I’ve already used. It’s different every time.”\n\n— User testing feedback'}
+/>
 					</KeyDecision>
 					<KeyDecision
 						number={5}
-						title="Build design foundations"
+						title="Build design systems foundations"
 						paragraphs={[
 							"As NAVIT expanded, one-off UI patterns became harder to maintain. New products like Deutschlandticket, eBike subscriptions, and Bike Leasing added more rules, more states, and more edge cases.",
 							"Together with Product Designer Afra Saneinejad and Engineering, I helped create NAVIT’s first shared Figma library and align components with MUI implementation. The goal was not only visual consistency, but reusable patterns for repeated states, product rules, and handoff.",
 						]}
-						changes={["Established shared UI foundations across the product.", "Created more reusable patterns for repeated product states and edge cases.", "Supported major launches including Deutschlandticket and Bike Leasing.", "Reduced design-dev iteration time by 30–50% through Figma/MUI alignment.", "Mentored a junior designer across UX research, component work, and multi-track feature design."]}
+						
 						imagePath="/images/navit/navit-design-system-audit.png"
 					/>
 				</section>
@@ -173,9 +179,8 @@ import SiteHeader from "../../components/SiteHeader.astro";
 							<p>I improved dashboard workflows that made those operational tasks clearer and more consistent with the employee experience.</p>
 							<p>This mattered because every employee-facing benefit had an admin-side counterpart: policy setup, budget rules, reimbursement handling, payment logic, reporting, and support resolution.</p>
 						</div>
-						<Callout variant="summary" label="Not just an app design" text="The work made a complex mobility benefits platform clearer for employees, more manageable for HR and operations teams, and easier for the product team to extend." />
-					</div>
-					<ImageBlock src="/images/navit/navit-dashboard.png" alt="NAVIT HR admin dashboard" aspect="dashboard" />
+						</div>
+					<ImageBlock src="/images/navit/navit-dashboard.png" alt="NAVIT HR admin dashboard" aspect="dashboard" placeholder={false} />
 				</section>
 
 				<section class="outro">
@@ -198,9 +203,14 @@ import SiteHeader from "../../components/SiteHeader.astro";
 								<li>Continued dashboard simplification for HR admins managing policies and exceptions.</li>
 								<li>More structured experimentation around language, policy reminders, and budget explanations.</li>
 							</ul>
-							<p>This work also led to a lightweight continuous research practice at NAVIT, which I cover in a separate case study.</p>
 						</div>
-					</section>
+					</section>				
+				<CaseStudyNextLink
+					label="Continue to:"
+					href="/work/navit-research-loop/"
+					text="Building NAVIT’s first research loop →"
+				/>
+				</section>
 				</section>
 			</main>
 			<SiteFooter />
@@ -303,6 +313,20 @@ import SiteHeader from "../../components/SiteHeader.astro";
 	.outro p,
 	.outro ul {
 		max-width: var(--layout-measure);
+	}
+
+	.outro h4.display {
+		font-family: 'Lora', serif;
+		font-size: 16px;
+		font-weight: 700;
+		margin: 0;
+	}
+
+	.outro p.text {
+		font-family: 'Lora', serif;
+		font-size: 16px;
+		font-style: italic;
+		margin: 0;
 	}
 
 	.outro ul {

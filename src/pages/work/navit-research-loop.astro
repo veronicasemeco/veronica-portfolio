@@ -1,0 +1,297 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Callout from "../../components/Callout.astro";
+import CaseStudyHero from "../../components/CaseStudyHero.astro";
+import CaseStudyMeta from "../../components/CaseStudyMeta.astro";
+import ImageBlock from "../../components/ImageBlock.astro";
+import KeyDecision from "../../components/KeyDecision.astro";
+import ResultCards from "../../components/ResultCards.astro";
+import CaseStudyNextLink from "../../components/CaseStudyNextLink.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+---
+
+<Layout
+	title="Building NAVIT’s First Research Loop | Veronica Semeco"
+	description="Case study by Veronica Semeco on building NAVIT's first research loop."
+>
+	<div class="page">
+		<SiteHeader current="work" />
+		<main id="main">
+			<CaseStudyHero
+				kicker="Building"
+				title="NAVIT’s first research loop"
+				imagePath="/images/navit-research/navit-research-hero.png"
+			/>
+
+			<section class="intro">
+				<div class="intro-top">
+					<div class="body-copy intro-summary">
+						<p>When I joined NAVIT, the team had no structured way to hear from end users or understand recurring product issues beyond support tickets and occasional customer feedback.</p>
+						<p>I created a lightweight monthly research loop that brought user feedback into product decisions without adding heavy process. The loop connected employee feedback with Support, Customer Success, and Product so recurring issues could be traced back to product decisions instead of handled as isolated tickets.</p>
+					</div>
+					<CaseStudyMeta
+						items={[
+							{ label: "Role", value: "Senior Product Designer / UX Researcher" },
+							{ label: "Timeline", value: "Oct 2022–July 2025" },
+							{ label: "Product area", value: "Employee app, mobility benefits, product discovery" },
+							{ label: "Scope", value: "NPS follow-up interviews, monthly insight reports, usability tests, research repository, Support/CS feedback loop, new-joiner testing" },
+						]}
+					/>
+				</div>
+
+
+				<section class="intro-card">
+					<h2 class="display">Impact</h2>
+					<ImageBlock src="/images/navit-research/navit-research-impact.png" alt="NAVIT research impact overview" aspect="shallow" />
+					
+				</section>
+
+				<section class="intro-card">
+					<h2 class="display">Context</h2>
+					<div class="body-flow">
+						<p>NAVIT was scaling, but the team had limited visibility into the employee experience.</p>
+						<p>User feedback appeared as scattered signals: support tickets, account questions, NPS comments, and onboarding confusion.</p>
+						<p>The team needed a lightweight system that could surface recurring patterns and turn them into product input.</p>
+					</div>
+				</section>
+
+				<section class="intro-card">
+					<h2 class="display">The challenge</h2>
+					<div class="body-flow">
+						<p>How do you build useful research practice in a small startup without adding heavy process?</p>
+						<p>The system had to be lightweight enough for one person to run, reliable enough to repeat every month, and clear enough for Product, Support, Customer Success, and leadership to use.</p>
+					</div>
+				</section>
+
+				<section class="intro-card">
+					<h2 class="display">My role</h2>
+					<div class="body-flow">
+						<p>I designed and ran the research loop while working as Senior Product Designer / UX Researcher.</p>
+						<p>I focused on:</p>
+						<ul>
+							<li>Setting up the monthly research cadence.</li>
+							<li>Prioritizing which users to contact.</li>
+							<li>Running follow-up interviews with low-score NPS respondents and high-priority accounts.</li>
+							<li>Offering async feedback options for users who could not join a call.</li>
+							<li>Synthesizing interview notes into recurring themes.</li>
+							<li>Turning findings into monthly readouts and product recommendations.</li>
+							<li>Creating a Notion repository and lightweight research playbook.</li>
+							<li>Building feedback rituals with Product, Support, and Customer Success.</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+
+			<section class="decisions">
+				<KeyDecision
+					number={1}
+					title="Turn existing feedback into research input"
+paragraphs={[
+	"User signals were already coming from support tickets, NPS scores, Customer Success conversations, and occasional user feedback.",
+	"I used those signals as the starting point for a monthly research cadence. Each month, I reviewed recent feedback, prioritized low-score respondents and high-priority accounts, and turned the strongest signals into outreach.",
+]}
+				
+					imagePath="/images/navit-research/navit-research-loop-diagram.png"
+				/>
+				<KeyDecision
+					number={2}
+					title="Talk to the users most affected by the issues"
+paragraphs={[
+	"I focused outreach on users closest to recurring frustration: low-score NPS respondents, users connected to repeated support issues, and high-priority accounts.",
+	"Users could choose a 30-minute call or async email feedback. Calls were recorded and summarized with AI-assisted notes, then manually reviewed so the findings kept context and nuance.",
+]}
+					imagePath="/images/navit-research/navit-research-outreach-flow.png"
+				>
+					<Callout
+	slot="callout"
+	text={'“I’m happy you are reaching out... A lot of companies say they listen to their users but don’t really do it.”\n\n— User, as they greeted me on a call'}
+/>
+				</KeyDecision>
+				<KeyDecision
+					number={3}
+					title="Turn patterns into monthly product input"
+					paragraphs={[
+	"Each month, I grouped feedback into themes, tagged findings in Notion, and created a concise readout with 2–4 product-relevant takeaways.",
+	"When useful, I added lightweight charts, quotes, screenshots, or examples so the team could understand the pattern quickly and connect it to specific flows such as onboarding, ticket pricing, allocation, or benefit value.",
+]}					
+					imagePath="/images/navit-research/navit-research-monthly-insights.png"
+				/>
+				<KeyDecision
+					number={4}
+					title="Connect research with Product, Support, and Customer Success"
+				paragraphs={[
+	"I created a feedback loop between Product, Support, and Customer Success so recurring user issues could be discussed with the right context.",
+	"Support surfaced repeated pain points, Customer Success added employer-side context, and Product connected the patterns to active work and backlog decisions.",
+	"I also ran short usability tests with new joiners during their first days at the company. These sessions helped surface first-time-user issues while also giving new teammates hands-on product onboarding.",
+]}
+					imagePath="/images/navit-research/navit-research-internal-feedback-loop.png"
+				/>
+			</section>
+
+			<section class="additional section--ruled">
+			</section>
+
+			<section class="outro">
+				<section>
+					<h2 class="display">What I would improve next</h2>
+					<div class="body-flow">
+						<p>If I were continuing the system, I would add:</p>
+						<ul>
+							<li>Lightweight in-app recruitment for interviews and usability tests.</li>
+							<li>A preferred tester pool with small incentives.</li>
+							<li>Short follow-up surveys to validate patterns from interviews.</li>
+							<li>Better behavioral analytics to combine qualitative signals with usage data.</li>
+							<li>More automation around reminders and follow-up emails.</li>
+						</ul>
+						<p>The loop was designed to stay lean, but better tracking would make prioritization sharper.</p>
+					</div>
+				</section>
+				<CaseStudyNextLink
+					label="Continue to:"
+					href="/work/haisabikini/"
+					text="From catalog browsing to fit-guided shopping →"
+				/>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>
+
+<style>
+	.intro {
+		display: grid;
+		gap: var(--space-8);
+		padding: var(--space-11) var(--layout-page-padding) var(--space-12);
+	}
+
+	.intro-top {
+		display: grid;
+		gap: var(--space-8);
+		grid-template-columns: minmax(0, var(--layout-measure)) var(--layout-aside);
+		justify-content: space-between;
+	}
+
+	.intro-summary,
+	.intro-card,
+	.outro section {
+		display: grid;
+		gap: var(--space-8);
+	}
+
+	.intro-summary {
+		align-content: start;
+		gap: var(--space-3);
+	}
+
+	.intro-card {
+		max-width: var(--layout-measure);
+		padding-top: var(--space-11);
+	}
+
+	.intro-card h2,
+	.outro h2 {
+		font-size: var(--text-l);
+	}
+
+	.intro-card p,
+	.intro-card li,
+	.additional p,
+	.outro p,
+	.outro li {
+		color: var(--color-text-primary);
+		font-size: var(--text-s);
+		line-height: var(--leading-ui);
+	}
+
+	.body-flow {
+		display: grid;
+		gap: var(--space-3);
+	}
+
+	.body-flow ul {
+		margin: 0;
+		padding-left: var(--space-6);
+	}
+
+	.body-flow li + li {
+		margin-top: var(--space-2);
+	}
+
+	.decisions {
+		padding: 0 var(--layout-page-padding);
+	}
+
+	.decisions :global(.key-decision) {
+		border-top: 0.5px solid var(--color-line-secondary);
+	}
+
+	.additional {
+		padding: var(--space-11) var(--layout-page-padding);
+	}
+
+	.additional :global(.callout) {
+		max-width: var(--layout-measure);
+	}
+
+	.outro {
+		padding: 0 var(--layout-page-padding);
+	}
+
+	.outro section {
+		padding: var(--space-11) 0;
+	}
+
+	.outro section:last-child {
+		padding-bottom: var(--space-12);
+	}
+
+	.outro p,
+	.outro ul {
+		max-width: var(--layout-measure);
+	}
+
+	.outro h4.display {
+		font-family: 'Lora', serif;
+		font-size: 16px;
+		font-weight: 700;
+		margin: 0;
+	}
+
+	.outro p.text {
+		font-family: 'Lora', serif;
+		font-size: 16px;
+		font-style: italic;
+		margin: 0;
+	}
+
+	.outro ul {
+		margin: 0;
+		padding-left: var(--space-6);
+	}
+
+	@media (max-width: 760px) {
+		.intro-top {
+			grid-template-columns: 1fr;
+		}
+
+		.intro {
+			padding: var(--space-11) var(--layout-page-padding) var(--space-12);
+		}
+
+		.intro-card {
+			gap: var(--space-6);
+			padding-top: var(--space-9);
+		}
+
+		.outro section {
+			gap: var(--space-6);
+		}
+
+		.intro-card h2,
+		.outro h2 {
+			font-size: var(--text-mm);
+			font-weight: 500;
+		}
+	}
+</style>

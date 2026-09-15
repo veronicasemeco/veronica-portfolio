@@ -35,7 +35,7 @@ a {
 	text-decoration: none;
 }
 
-a:not(.button, .logo, .project-title, .ai-lab-link, .skip-link) {
+a:not(.button, .logo, .project-title, .ai-lab-link, .what-i-bring-link, .skip-link) {
 	background-image: linear-gradient(currentColor, currentColor);
 	background-position: 0 100%;
 	background-repeat: no-repeat;
@@ -43,8 +43,8 @@ a:not(.button, .logo, .project-title, .ai-lab-link, .skip-link) {
 	transition: background-size 180ms ease-in-out;
 }
 
-a:not(.button, .logo, .project-title, .ai-lab-link, .skip-link):hover,
-a:not(.button, .logo, .project-title, .ai-lab-link, .skip-link):focus-visible {
+a:not(.button, .logo, .project-title, .ai-lab-link, .what-i-bring-link, .skip-link):hover,
+a:not(.button, .logo, .project-title, .ai-lab-link, .what-i-bring-link, .skip-link):focus-visible {
 	background-size: 100% 1px;
 }
 
@@ -121,7 +121,7 @@ h4 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-	a:not(.button, .logo, .project-title, .ai-lab-link, .skip-link) {
+	a:not(.button, .logo, .project-title, .ai-lab-link, .what-i-bring-link, .skip-link) {
 		transition: none;
 	}
 }

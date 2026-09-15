@@ -6,11 +6,20 @@ interface Props {
 }
 
 const { label, text, variant = "quote" } = Astro.props;
+const lines = text.split("\n");
 ---
 
 <aside class:list={["callout", `callout--${variant}`]}>
 	{label && <p class="label">{label}</p>}
-	<p class="text">{text}</p>
+
+	<p class="text">
+		{lines.map((line, index) => (
+			<>
+				{line}
+				{index < lines.length - 1 && <br />}
+			</>
+		))}
+	</p>
 </aside>
 
 <style>

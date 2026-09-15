@@ -1,19 +1,22 @@
 ---
+import Lightbox from './Lightbox.astro';
+
 interface Props {
 	title: string;
 	imagePath: string;
+	kicker?: string;
 }
 
-const { title, imagePath } = Astro.props;
+const { title, imagePath, kicker = "Redesigning" } = Astro.props;
 ---
 
 <section class="case-hero">
 	<div class="case-hero-content">
-		<h1 class="display">Redesigning</h1>
+		<h1 class="display">{kicker}</h1>
 		<p class="case-hero-title display">{title}</p>
-		<div class="case-hero-image" role="img" aria-label={`NAVIT platform hero image placeholder. Intended image path: ${imagePath}`}>
-			<span>Image placeholder</span>
-		</div>
+		<Lightbox src={imagePath} alt={`${title} hero image`}>
+			<img class="case-hero-image" src={imagePath} alt={`${title} hero image`} loading="lazy" />
+		</Lightbox>
 	</div>
 </section>
 
@@ -39,15 +42,10 @@ const { title, imagePath } = Astro.props;
 	}
 
 	.case-hero-image {
-		align-items: center;
-		aspect-ratio: 1376 / 625;
-		background: linear-gradient(135deg, var(--color-button-label-primary), var(--color-line-primary));
-		color: var(--color-text-secondary);
-		display: flex;
-		font-size: var(--text-xs);
-		justify-content: center;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
+		border-radius: 8px;
+		display: block;
+		height: auto;
+		width: 100%;
 	}
 
 	@media (max-width: 760px) {
@@ -57,7 +55,8 @@ const { title, imagePath } = Astro.props;
 		}
 
 		.case-hero-image {
-			aspect-ratio: 360 / 485;
+			aspect-ratio: auto;
+			height: auto;
 		}
 	}
 </style>

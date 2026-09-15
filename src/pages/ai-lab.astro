@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AIExperimentCard from "../components/AIExperimentCard.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+
+const experiments = [
+	{
+		title: "MoveBetter",
+		description:
+			"An AI-assisted product design experiment exploring how quickly a designer can move from concept to working prototype and what still requires human judgment along the way.",
+		body: [
+			[
+				{
+					text: "Built over a 10-day sprint using free AI coding tools and no engineering support, MoveBetter tested how prompting, product thinking, and usability testing interact in a design-to-code workflow. The biggest lesson was discovering where AI accelerates execution and where product decisions still depend on human judgment. In short: AI makes it possible to prototype and test ideas much earlier, but it still needs someone to define the problem and make sense of the results.",
+				},
+			],
+		],
+		tags: ["AI prototyping", "Product design", "Usability testing"],
+		status: "Prototype experiment",
+		href: "https://www.veronicasemeco.com/ai-assisted-product-design-sprint",
+	},
+	{
+		title: "Pandemic Silence",
+		description:
+			"A rebuild of a pandemic-era storytelling project, exploring how today’s AI tools can accelerate the creation of interactive, media-rich experiences.",
+		body: [
+			[
+				{ text: "The original " },
+				{
+					text: "Pandemic Silence Project website",
+					href: "https://www.pandemicsilence.org/",
+				},
+				{
+					text: " collected sounds from around the world to document how COVID lockdowns changed the soundscape of cities and daily life. This experiment revisits that work using modern AI-assisted tools, comparing what once required a traditional web production process and still fell short of the original vision with what can now be built by a small team, or even a single designer.",
+				},
+			],
+		],
+		tags: ["Data storytelling", "AI-assisted development", "Interaction design"],
+		status: "Prototype / concept",
+		href: "https://d0080020-387b-4f00-af21-b0464eda502c-00-mif2i3yt6xpq.kirk.replit.dev/",
+	},
+	{
+		title: "Portfolio as a Product",
+		description:
+			"An experiment in using AI to synthesize years of work, clarify positioning, and redesign a portfolio around real hiring feedback.",
+		body: [
+			[
+				{
+					text: "The portfolio you’re currently browsing is the result of that experiment. I gathered hiring feedback, interview notes, my CV, LinkedIn profile, and existing case studies into a shared knowledge base, then used AI to identify gaps, recurring themes, and opportunities to strengthen my positioning. The resulting insights shaped both the content and the build itself, becoming a practical test of how research, design systems, and AI-assisted development can work together to move from strategy to production.",
+				},
+			],
+		],
+		tags: [
+			"Design systems",
+			"AI-assisted development",
+			"Design-to-code",
+			"Product strategy",
+		],
+		status: "Current experiment",
+	},
+];
+---
+
+<Layout
+	title="AI Lab | Veronica Semeco"
+	description="Practical experiments in AI-assisted design work by Veronica Semeco."
+>
+	<div class="page">
+		<SiteHeader />
+		<main id="main">
+			<section class="ai-hero">
+				<h1 class="display">AI Lab</h1>
+				<p>
+					A collection of experiments exploring how AI tools are reshaping
+					product design workflows: from concept validation and prototyping to
+					research synthesis, storytelling, and coded experiences.
+				</p>
+			</section>
+			<section class="ai-gallery" aria-label="AI Lab experiments">
+				{experiments.map((experiment) => (
+					<AIExperimentCard {...experiment} />
+				))}
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>
+
+<style>
+	.ai-hero {
+		display: grid;
+		gap: var(--space-8);
+		padding: var(--layout-section-y) var(--layout-page-padding);
+	}
+
+	h1 {
+		font-size: var(--text-xxl);
+	}
+
+	.ai-hero p {
+		color: var(--color-text-primary);
+		font-size: var(--text-m);
+		line-height: var(--leading-body);
+		max-width: var(--layout-measure);
+	}
+
+	.ai-gallery {
+		padding: 0 0 var(--space-12);
+	}
+
+	@media (max-width: 760px) {
+		h1 {
+			font-size: var(--text-l);
+		}
+	}
+</style>

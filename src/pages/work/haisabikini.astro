@@ -1,0 +1,348 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Callout from "../../components/Callout.astro";
+import CaseStudyHero from "../../components/CaseStudyHero.astro";
+import CaseStudyMeta from "../../components/CaseStudyMeta.astro";
+import ImageBlock from "../../components/ImageBlock.astro";
+import KeyDecision from "../../components/KeyDecision.astro";
+import ResultCards from "../../components/ResultCards.astro";
+import CaseStudyNextLink from "../../components/CaseStudyNextLink.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+---
+
+<Layout
+	title="From Catalog Browsing to Fit-Guided Shopping | Veronica Semeco"
+	description="Case study by Veronica Semeco on the HaisaBikini Shopify rebuild."
+>
+	<div class="page">
+		<SiteHeader current="work" />
+		<main id="main">
+			<CaseStudyHero
+				kicker="From catalog browsing"
+				title="to fit-guided shopping"
+				imagePath="/images/haisabikini/haisa-hero.png"
+			/>
+
+			<section class="intro">
+				<div class="intro-top">
+					<div class="body-copy intro-summary">
+						<p>The goal was to translate what already worked in stores: fit advice, styling support, and confidence around coverage and support, into a clearer online shopping experience.</p>
+						<p>HAISABIKINI is the online store of an authorized U.S. franchise retailer of Agua Bendita, the Colombian swimwear brand. I first defined the fit-guided strategy through an e-commerce audit, then translated it into a WooCommerce-to-Shopify rebuild.</p>
+					</div>
+					<CaseStudyMeta
+						items={[
+							{ label: "Role", value: "UX Strategy / Product Design" },
+							{ label: "Timeline", value: "2 months, March–May 2026" },
+							{ label: "Platform", value: "Shopify, Prestige theme" },
+							{ label: "Scope", value: "E-commerce strategy, WooCommerce-to-Shopify rebuild, navigation, collections, product data cleanup, PDP improvements, SEO/analytics setup, QA" },
+						]}
+					/>
+				</div>
+
+				<section class="intro-card">
+					<h2 class="display">Outcome</h2>
+					<ResultCards
+						results={[
+	{
+		label: "Catalog to guided shopping",
+		detail: "The experience moved from generic product browsing to a fit-guided structure built around support, coverage, matching pieces, and expert help.",
+	},
+	{
+		label: "Strategy translated into Shopify",
+		detail: "The audit identified the need to make in-store fit expertise visible online. The rebuild turned that strategy into navigation, collections, PDP logic, product data, and trust cues.",
+	},
+	{
+		label: "Launch-ready foundation",
+		detail: "The project created a cleaner Shopify foundation for fit-based browsing, product merchandising, PDP guidance, SEO, analytics setup, QA, and future optimization.",
+	},
+]}
+					/>
+				</section>
+
+				<section class="intro-card">
+					<h2 class="display">Context</h2>
+					<div class="body-flow">
+						<p>HAISABIKINI sells Agua Bendita swimwear through physical stores and online.</p>
+						<p>In store, customers get help choosing styles based on fit, coverage, support, size, body confidence, and styling. Online, that value was harder to see. The previous store behaved more like a catalog: product grids, seasonal collections, and product pages that expected shoppers to decide on their own.</p>
+						<p>Customers could already find Agua Bendita elsewhere. HAISABIKINI needed to make its advantage visible online: authorized Agua Bendita access, 12 years of swimwear expertise, physical store credibility, and help choosing the right piece.</p>
+						<p>The strategy phase identified the core opportunity: move from product-first browsing to guidance-first shopping.</p>
+					</div>
+					<ImageBlock src="/images/haisabikini/haisa-homepage-before-after.png" alt="HAISABIKINI homepage before and after" aspect="shallow" />
+				</section>
+
+				<section class="intro-card">
+					<h2 class="display">The challenge</h2>
+					<div class="body-flow">
+						<p>How do you make an online swimwear store feel less like a generic catalog and more like a guided fit experience without delaying launch or building a custom fit tool?</p>
+						<p>Shoppers needed help answering practical questions: Which top gives more support? Which bottom gives more coverage? How do I find the matching piece? Do these patterns coordinate? Is there a real person who can help me choose?</p>
+						<p>The work had real constraints: messy product data, thousands of product images, Shopify theme limits, and an Odoo integration outside my scope before launch.</p>
+					</div>
+				</section>
+
+				<section class="intro-card">
+					<h2 class="display">My role</h2>
+					<div class="body-flow">
+						<p>I led the strategy and UX structure from the initial e-commerce audit through the Shopify rebuild.</p>
+						<p>I focused on:</p>
+						<ul>
+							<li>Defining the shift from product-first to guidance-first shopping.</li>
+							<li>Restructuring navigation and collections.</li>
+							<li>Creating product data logic for product type, gender, support, coverage, print, and matching relationships.</li>
+							<li>Defining how support and coverage appear across PDPs and collections.</li>
+							<li>Designing PDP guidance logic for size guidance, WhatsApp support, matching pieces, same-collection recommendations, and trust signals.</li>
+							<li>Scoping phase one around a strong Shopify foundation instead of an overbuilt concept.</li>
+						</ul>
+						<p>I did not own Odoo/ERP debugging, full custom development, Meta shop migration, or post-launch analytics. Since the site has not launched yet, there are no conversion or revenue results to claim.</p>
+					</div>
+				</section>
+			</section>
+
+			<section class="decisions">
+				<KeyDecision
+					number={1}
+					title="Make fit guidance the strategic direction"
+					paragraphs={[
+						"The audit showed that the old site listed products and collections, but did not clearly explain why a shopper should buy here instead of through Agua Bendita’s main site or another retailer.",
+						"I recommended positioning HAISABIKINI around swimwear guidance. The store still needed to sell Agua Bendita clearly, but the stronger digital role became helping customers choose the right fit with more confidence.",
+					]}
+					changes={[
+						"Homepage messaging shifted toward fit confidence and expert guidance.",
+						"“Find Your Fit” became a visible shopping path.",
+						"Trust signals emphasized 12 years of expertise, in-store experience, authorized Agua Bendita access, and free U.S. shipping.",
+						"WhatsApp was reframed as stylist help, not only a support widget.",
+					]}
+					imagePath="/images/haisabikini/haisa-fit-collections.png"
+				/>
+
+				<KeyDecision
+					number={2}
+					title="Structure navigation around shopping intent"
+					paragraphs={[
+						"The previous browsing structure leaned on catalog and collection logic. I restructured navigation around the way shoppers choose swimwear: product type, support, coverage, and matching pieces.",
+						"“Find Your Fit” gave shoppers a guidance-oriented path without requiring a custom quiz, while Men and Kids stayed simpler because the fit logic was less complex there.",
+					]}
+					changes={[
+						"Women’s swimwear was separated into Bikini Tops, Bikini Bottoms, One Pieces, Find Your Fit, and Ready to Wear.",
+						"Fit became a browsing concept through support and coverage paths.",
+						"Support and coverage filters applied where they made sense for bikinis and swimsuits.",
+						"Men and Kids stayed simpler because the fit logic was less complex there.",
+						"Matching pieces became easier to reach from the product journey.",
+					]}
+					imagePath="/images/haisabikini/haisa-navigation-structure.png"
+				/>
+
+				<KeyDecision
+					number={3}
+					title="Make product data do UX work"
+					paragraphs={[
+						"The fit-guided experience depended on cleaner product data. I structured the product logic around category, gender, product type, support, coverage, print, and matching relationships.",
+						"Tags supported collection and filtering logic. Metafields supported cleaner PDP display logic, especially for support and coverage. This became the bridge between the fit-guided strategy and the Shopify implementation.",
+					]}
+					changes={[
+						"Product type determined which fit information appeared on the PDP.",
+						"Support became filterable for bikini tops.",
+						"Coverage became filterable for bikini bottoms and one-pieces.",
+						"Tags supported collection and filtering logic.",
+						"Metafields supported cleaner PDP display logic.",
+						"Print and collection logic supported matching products and same-collection recommendations.",
+					]}
+					imagePath="/images/haisabikini/haisa-product-data-ux-logic.png"
+				/>
+
+				<KeyDecision
+					number={4}
+					title="Turn the PDP into a decision page"
+					paragraphs={[
+						"The old PDP showed the product, but did not support the full swimwear decision: fit, size, matching pieces, and help if the shopper was unsure.",
+						"The new PDP introduced product-type-specific fit logic, clearer sizing, directional matching labels, WhatsApp stylist help, same-collection recommendations, and trust signals.",
+						"For tops, the matching section says “Bottoms designed to match.” For bottoms, it says “Tops designed to match.” This made the relationship clearer than a generic related-products module.",
+					]}
+					changes={[
+						"Bikini top PDPs can show support.",
+						"Bikini bottom PDPs can show coverage.",
+						"One-piece PDPs can show both support and coverage.",
+						"Matching pieces are clearer and more directional.",
+						"Same-collection recommendations clarify related products.",
+						"WhatsApp appears as support for the shopping decision.",
+						"Trust signals reinforce store credibility and purchase confidence.",
+					]}
+					imagePath="/images/haisabikini/haisa-pdp-fit-module.png"
+				/>
+
+				<KeyDecision
+					number={5}
+					title="Keep phase one focused"
+					paragraphs={[
+						"Lightweight feedback from three people sharpened the final execution, especially around naming, product type clarity, matching logic, and whether pieces from the same collection coordinate.",
+						"There were also bigger ideas: a fit quiz, richer product education, image reordering, advanced recommendations, custom analytics, and a fuller mix-and-match guide. For phase one, I protected the Shopify foundation instead of trying to ship every possible idea.",
+						"The final scope focused on Shopify setup, navigation, collections, product data cleanup, PDP guidance logic, fit-based browsing, basic SEO, GA4, domain connection, light QA, and launch support.",
+					]}
+					changes={[
+						"Matching labels became more directional.",
+						"Microcopy clarified “same collection” and “designed to match.”",
+						"PDP labels became more explicit about bikini tops vs. bottoms.",
+						"“Complete the set” and “Complete the look” were treated as different concepts.",
+						"Bigger ideas moved into a future phase after launch and real traffic.",
+						"Phase one stayed focused on the Shopify foundation and launch readiness.",
+					]}
+					imagePath="/images/haisabikini/haisa-phase-one-next-phase.png"
+				/>
+			</section>
+
+			<section class="outro">
+				<section>
+					<h2 class="display">What I would improve next</h2>
+					<div class="body-flow">
+						<p>Once the site is live and the Odoo integration is stable, I would focus on:</p>
+						<ul>
+							<li>Measuring engagement with fit collections and support/coverage filters.</li>
+							<li>Understanding where shoppers drop off when completing a bikini set.</li>
+							<li>Improving product naming so silhouette and product type are easier to scan.</li>
+							<li>Reordering images so the item being sold is clear earlier.</li>
+							<li>Tracking WhatsApp clicks from PDPs.</li>
+							<li>Clarifying collection-based matching and mix-and-match logic.</li>
+							<li>Improving filters for ready-to-wear and accessories.</li>
+							<li>Testing whether a more guided fit flow is worth building later.</li>
+						</ul>
+						<p>The foundation was built so future improvements can be based on evidence, not guesses.</p>
+					</div>
+				</section>
+				<CaseStudyNextLink
+					label="Continue to:"
+					href="/work/navit-platform/"
+					text="Redesigning NAVIT’s mobility platform →"
+				/>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>
+
+<style>
+	.intro {
+		display: grid;
+		gap: var(--space-8);
+		padding: var(--space-11) var(--layout-page-padding) var(--space-12);
+	}
+
+	.intro-top {
+		display: grid;
+		gap: var(--space-8);
+		grid-template-columns: minmax(0, var(--layout-measure)) var(--layout-aside);
+		justify-content: space-between;
+	}
+
+	.intro-summary,
+	.intro-card,
+	.additional,
+	.outro section {
+		display: grid;
+		gap: var(--space-8);
+	}
+
+	.intro-summary {
+		align-content: start;
+		gap: var(--space-3);
+	}
+
+	.intro-card {
+		max-width: var(--layout-measure);
+		padding-top: var(--space-11);
+	}
+
+	.intro-card h2,
+	.outro h2 {
+		font-size: var(--text-l);
+	}
+
+	.intro-card p,
+	.intro-card li,
+	.additional p,
+	.outro p,
+	.outro li {
+		color: var(--color-text-primary);
+		font-size: var(--text-s);
+		line-height: var(--leading-ui);
+	}
+
+	.body-flow {
+		display: grid;
+		gap: var(--space-3);
+	}
+
+	.body-flow ul {
+		margin: 0;
+		padding-left: var(--space-6);
+	}
+
+	.body-flow li + li {
+		margin-top: var(--space-2);
+	}
+
+	.decisions {
+		padding: 0 var(--layout-page-padding);
+	}
+
+	.decisions :global(.key-decision) {
+		border-top: 0.5px solid var(--color-line-secondary);
+	}
+
+	.additional {
+		padding: var(--space-11) var(--layout-page-padding);
+	}
+
+	.additional :global(.callout),
+	.additional :global(.image-block) {
+		max-width: var(--layout-measure);
+	}
+
+	.outro {
+		padding: 0 var(--layout-page-padding);
+	}
+
+	.outro section {
+		padding: var(--space-11) 0;
+	}
+
+	.outro section:last-child {
+		padding-bottom: var(--space-12);
+	}
+
+	.outro p,
+	.outro ul,
+	.outro :global(.result-cards) {
+		max-width: var(--layout-measure);
+	}
+
+	.outro ul {
+		margin: 0;
+		padding-left: var(--space-6);
+	}
+
+	@media (max-width: 760px) {
+		.intro-top {
+			grid-template-columns: 1fr;
+		}
+
+		.intro {
+			padding: var(--space-11) var(--layout-page-padding) var(--space-12);
+		}
+
+		.intro-card {
+			gap: var(--space-6);
+			padding-top: var(--space-9);
+		}
+
+		.additional,
+		.outro section {
+			gap: var(--space-6);
+		}
+
+		.intro-card h2,
+		.outro h2 {
+			font-size: var(--text-mm);
+			font-weight: 500;
+		}
+	}
+</style>

@@ -1,0 +1,44 @@
+---
+const { label, href, text } = Astro.props;
+---
+<section class="next-case-study">
+	<h4 class="display">{label}</h4>
+	<div class="body-flow">
+		<p class="text"><a href={href}>{text}</a></p>
+	</div>
+</section>
+
+<style>
+	.next-case-study {
+		padding: var(--space-11) 0;
+	}
+
+	.next-case-study .body-flow {
+		max-width: var(--layout-measure);
+	}
+
+	.next-case-study > .display {
+		font-family: var(--font-text);
+		color: var(--color-text-secondary);
+		font-size: var(--text-xs);
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		line-height: var(--leading-tight);
+		margin-bottom: var(--space-2);
+		text-transform: uppercase;
+	}
+
+	.next-case-study .text a {
+		color: var(--color-text-secondary);
+		font-family: var(--font-display);
+		font-size: var(--text-s);
+		font-style: italic;
+		line-height: var(--leading-tight);
+		text-decoration: none;
+	}
+
+	.next-case-study .text a:hover,
+	.next-case-study .text a:focus {
+		text-decoration: underline;
+	}
+</style>

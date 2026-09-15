@@ -1,14 +1,15 @@
 ---
+import Lightbox from './Lightbox.astro';
+
 interface Props {
 	number: number;
 	title: string;
 	paragraphs: string[];
-	changes: string[];
 	imagePath: string;
 }
 
-const { number, title, paragraphs, changes, imagePath } = Astro.props;
-const mediaItems = [{ src: imagePath, alt: `${title} image placeholder` }];
+const { number, title, paragraphs, imagePath } = Astro.props;
+const mediaItems = [{ src: imagePath, alt: `${title} image` }];
 ---
 
 <article class="key-decision">
@@ -20,18 +21,17 @@ const mediaItems = [{ src: imagePath, alt: `${title} image placeholder` }];
 		</div>
 		<slot name="callout" />
 	</div>
-	<div class="changes">
-		<h4 class="display">What changed</h4>
-		<ul>
-			{changes.map((change) => <li>{change}</li>)}
-		</ul>
-	</div>
 	<div class="decision-media" aria-label={`${title} media`}>
-		<!-- TODO: Add carousel rendering here when key decision media supports multiple images. -->
 		{mediaItems.map((item) => (
-			<div class="decision-image" role="img" aria-label={`${item.alt}. Intended image path: ${item.src}`}>
-				<span>Image placeholder</span>
-			</div>
+			item.src ? (
+				<Lightbox src={item.src} alt={item.alt}>
+					<img class="decision-image" src={item.src} alt={item.alt} loading="lazy" />
+				</Lightbox>
+			) : (
+				<div class="decision-image placeholder" role="img" aria-label={`${item.alt}. Intended image path: ${item.src}`}>
+					<span>Image placeholder</span>
+				</div>
+			)
 		))}
 	</div>
 </article>
@@ -60,41 +60,29 @@ const mediaItems = [{ src: imagePath, alt: `${title} image placeholder` }];
 		justify-content: space-between;
 	}
 
-	.decision-body p,
-	.changes li {
-		font-size: var(--text-s);
-		line-height: var(--leading-ui);
-	}
+	.decision-body p {
+	font-size: var(--text-s);
+	line-height: var(--leading-ui);
+}
 
 	.decision-body p + p {
 		margin-top: var(--space-3);
 	}
 
-	.changes {
-		display: grid;
-		gap: var(--space-4);
-		max-width: var(--layout-measure);
-	}
-
-	h4 {
-		font-size: var(--text-s);
-		font-weight: 600;
-	}
-
-	ul {
-		margin: 0;
-		padding-left: var(--space-6);
-	}
-
-	li + li {
-		margin-top: var(--space-2);
-	}
+	
 
 	.decision-media {
 		display: grid;
 	}
 
 	.decision-image {
+		border-radius: 8px;
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+
+	.decision-image.placeholder {
 		align-items: center;
 		aspect-ratio: 1376 / 572;
 		background: linear-gradient(135deg, var(--color-line-primary), var(--color-surface-primary));
@@ -121,7 +109,7 @@ const mediaItems = [{ src: imagePath, alt: `${title} image placeholder` }];
 			font-weight: 500;
 		}
 
-		.decision-image {
+		.decision-image.placeholder {
 			aspect-ratio: 358 / 295;
 		}
 	}

@@ -1,0 +1,196 @@
+---
+import Tag from "./Tag.astro";
+
+interface BodySegment {
+	text: string;
+	href?: string;
+}
+
+interface Props {
+	title: string;
+	description: string;
+	body: BodySegment[][];
+	tags: string[];
+	status: string;
+	href?: string;
+}
+
+const {
+	title,
+	description,
+	body,
+	tags,
+	status,
+	href,
+} = Astro.props;
+---
+
+<article class:list={["ai-experiment-card", href && "ai-experiment-card--interactive"]}>
+	<div class="card-copy">
+		<p class="status">{status}</p>
+		{href ? (
+			<a class="card-title display" href={href} target="_blank" rel="noreferrer">
+				<span>{title}</span>
+				<span aria-hidden="true">→</span>
+			</a>
+		) : (
+			<h2 class="card-title display">
+				<span>{title}</span>
+			</h2>
+		)}
+		<p class="description">{description}</p>
+	</div>
+	<ul class="tags" aria-label={`${title} tags`}>
+		{tags.map((tag) => (
+			<li><Tag label={tag} /></li>
+		))}
+	</ul>
+	<div class="card-body">
+		{body.map((paragraph) => (
+			<p>
+				{paragraph.map((segment) =>
+					segment.href ? (
+						<a href={segment.href} target="_blank" rel="noreferrer">
+							{segment.text}
+						</a>
+					) : (
+						segment.text
+					)
+				)}
+			</p>
+		))}
+	</div>
+</article>
+
+<style>
+	.ai-experiment-card {
+		border-top: 0.5px solid var(--color-line-primary);
+		display: grid;
+		gap: var(--space-8);
+		padding: var(--space-11) var(--layout-page-padding);
+		transition: background-color 180ms ease-in-out;
+	}
+
+	.card-copy {
+		display: grid;
+		gap: var(--space-6);
+	}
+
+	.status {
+		color: var(--color-text-secondary);
+		font-size: var(--text-xs);
+		line-height: var(--leading-tight);
+		transition: color 180ms ease-in-out;
+	}
+
+	.card-title {
+		color: var(--color-text-headline);
+		font-size: var(--text-l);
+		line-height: var(--leading-tight);
+		background-image: none;
+		text-decoration: none;
+		transition: color 180ms ease-in-out, font-weight 180ms ease-in-out, gap 180ms ease-in-out;
+	}
+
+	.card-title {
+		align-items: center;
+		display: inline-flex;
+		gap: var(--space-4);
+		width: fit-content;
+	}
+
+	.description {
+		color: var(--color-text-primary);
+		font-size: var(--text-m);
+		line-height: var(--leading-body);
+		max-width: var(--layout-measure);
+		transition: color 180ms ease-in-out;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.card-body {
+		color: var(--color-text-primary);
+		font-size: var(--text-s);
+		line-height: var(--leading-body);
+		max-width: var(--layout-measure);
+		transition: color 180ms ease-in-out;
+	}
+
+	.card-body p {
+		margin: 0;
+	}
+
+	.card-body p + p {
+		margin-top: var(--space-4);
+	}
+
+	.tags :global(.tag) {
+		transition: border-color 180ms ease-in-out, color 180ms ease-in-out;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.ai-experiment-card--interactive:hover,
+		.ai-experiment-card--interactive:has(.card-title:focus-visible) {
+			background: var(--color-button-bg-primary);
+		}
+
+		.ai-experiment-card--interactive:hover .card-title,
+		.ai-experiment-card--interactive:has(.card-title:focus-visible) .card-title {
+			color: var(--color-surface-primary);
+			font-weight: 500;
+			gap: var(--space-10);
+		}
+
+		.ai-experiment-card--interactive:hover .status,
+		.ai-experiment-card--interactive:hover .description,
+		.ai-experiment-card--interactive:has(.card-title:focus-visible) .status,
+		.ai-experiment-card--interactive:has(.card-title:focus-visible) .description {
+			color: var(--color-surface-primary);
+		}
+
+		.ai-experiment-card--interactive:hover .card-body,
+		.ai-experiment-card--interactive:has(.card-title:focus-visible) .card-body {
+			color: var(--color-line-secondary);
+		}
+
+		.ai-experiment-card--interactive:hover .tags :global(.tag),
+		.ai-experiment-card--interactive:has(.card-title:focus-visible) .tags :global(.tag) {
+			border-color: var(--color-line-primary);
+			color: var(--color-line-secondary);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ai-experiment-card,
+		.card-title,
+		.status,
+		.description,
+		.card-body,
+		.tags :global(.tag) {
+			transition: none;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.ai-experiment-card {
+			padding: var(--space-10) var(--layout-page-padding);
+		}
+
+		.card-title {
+			font-size: var(--text-mobile-card-title);
+		}
+
+		.description {
+			font-size: var(--text-s);
+			line-height: var(--leading-ui);
+		}
+	}
+</style>

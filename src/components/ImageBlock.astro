@@ -1,4 +1,6 @@
 ---
+import Lightbox from './Lightbox.astro';
+
 interface Props {
 	src: string;
 	alt: string;
@@ -16,64 +18,62 @@ const { src, alt, caption, aspect = "wide", placeholder = true } = Astro.props;
 			<span>Image placeholder</span>
 		</div>
 	) : (
-		<img src={src} alt={alt} loading="lazy" />
+		<Lightbox src={src} alt={alt}>
+			<img src={src} alt={alt} loading="lazy" />
+		</Lightbox>
 	)}
 	{caption && <figcaption>{caption}</figcaption>}
 </figure>
 
 <style>
 	.image-block {
-		background: color-mix(in srgb, var(--color-line-secondary) 28%, var(--color-surface-primary));
-		border: 0.5px solid var(--color-line-secondary);
+		border-radius: 8px;
 		margin: 0;
 		overflow: hidden;
 		width: 100%;
 	}
 
-	.image-block--wide img,
 	.image-block--wide .placeholder {
 		aspect-ratio: 16 / 9;
 	}
 
-	.image-block--shallow img,
 	.image-block--shallow .placeholder {
 		aspect-ratio: 910 / 256;
 	}
 
-	.image-block--dashboard img,
 	.image-block--dashboard .placeholder {
 		aspect-ratio: 1376 / 630;
 	}
 
-	.image-block--square img,
 	.image-block--square .placeholder {
 		aspect-ratio: 1;
 	}
 
-	.image-block--tall img,
 	.image-block--tall .placeholder {
 		aspect-ratio: 4 / 5;
 	}
 
-	img,
-	.placeholder {
-		background: linear-gradient(
-			135deg,
-			color-mix(in srgb, var(--color-line-secondary) 22%, transparent),
-			color-mix(in srgb, var(--color-surface-primary) 92%, transparent)
-		);
-		object-fit: cover;
+	img {
+		display: block;
+		height: auto;
 		width: 100%;
 	}
 
 	.placeholder {
 		align-items: center;
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--color-line-secondary) 22%, transparent),
+			color-mix(in srgb, var(--color-surface-primary) 92%, transparent)
+		);
 		color: var(--color-text-secondary);
 		display: flex;
 		font-size: var(--text-xs);
 		justify-content: center;
 		letter-spacing: 0.08em;
+		object-fit: cover;
 		text-transform: uppercase;
+		width: 100%;
 	}
 
 	figcaption {
@@ -84,7 +84,6 @@ const { src, alt, caption, aspect = "wide", placeholder = true } = Astro.props;
 	}
 
 	@media (max-width: 760px) {
-		.image-block--dashboard img,
 		.image-block--dashboard .placeholder {
 			aspect-ratio: 358 / 300;
 		}

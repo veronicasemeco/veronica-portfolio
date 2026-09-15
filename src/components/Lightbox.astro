@@ -1,0 +1,243 @@
+---
+interface Props {
+	src: string;
+	alt: string;
+}
+
+const { src, alt } = Astro.props;
+---
+
+<div class="lightbox-trigger" data-lightbox-src={src} data-lightbox-alt={alt}>
+	<slot />
+</div>
+
+<dialog class="lightbox" data-lightbox-modal>
+	<div class="lightbox-overlay"></div>
+	<div class="lightbox-content">
+		<button class="lightbox-close" aria-label="Close lightbox" data-lightbox-close>
+			<span aria-hidden="true">×</span>
+		</button>
+		<img class="lightbox-image" src={src} alt={alt} data-lightbox-image />
+	</div>
+</dialog>
+
+<style>
+	.lightbox-trigger {
+		cursor: pointer;
+	}
+
+	.lightbox {
+		all: revert;
+		background: transparent;
+		border: none;
+		height: 100vh;
+		max-height: 100vh;
+		max-width: 100vw;
+		padding: 0;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		z-index: 9999;
+	}
+
+	.lightbox::backdrop {
+		background: rgba(0, 0, 0, 0.8);
+	}
+
+	.lightbox-overlay {
+		cursor: pointer;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.lightbox-content {
+		align-items: center;
+		display: flex;
+		height: 100%;
+		justify-content: center;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.lightbox-image {
+		border-radius: 8px;
+		display: block;
+		max-height: calc(100vh - 48px);
+		max-width: calc(100vw - 48px);
+		object-fit: contain;
+	}
+
+	.lightbox-close {
+		align-items: center;
+		appearance: none;
+		background: rgba(0, 0, 0, 0.6);
+		border: none;
+		border-radius: 4px;
+		color: white;
+		cursor: pointer;
+		display: flex;
+		font-size: 32px;
+		height: 44px;
+		justify-content: center;
+		line-height: 1;
+		padding: 0;
+		position: absolute;
+		right: 24px;
+		top: 24px;
+		transition: background 0.2s ease;
+		width: 44px;
+		z-index: 10000;
+	}
+
+	.lightbox-close:hover,
+	.lightbox-close:focus {
+		background: rgba(0, 0, 0, 0.8);
+		outline: none;
+	}
+
+	.lightbox-close:focus-visible {
+		outline: 2px solid white;
+		outline-offset: 2px;
+	}
+
+	@media (max-width: 760px) {
+		.lightbox-image {
+			max-height: calc(100vh - 32px);
+			max-width: calc(100vw - 32px);
+		}
+
+		.lightbox-close {
+			height: 40px;
+			right: 16px;
+			top: 16px;
+			width: 40px;
+		}
+	}
+</style>
+
+<script>
+	class LightboxManager {
+		private activeModal: HTMLDialogElement | null = null;
+		private lastFocusedElement: HTMLElement | null = null;
+
+		constructor() {
+			this.setupLightboxes();
+			this.setupGlobalHandlers();
+		}
+
+		private setupLightboxes() {
+			const triggers = document.querySelectorAll('[data-lightbox-src]');
+			triggers.forEach((trigger) => {
+				const src = trigger.getAttribute('data-lightbox-src');
+				if (!src) return;
+
+				trigger.addEventListener('click', (e) => {
+					e.stopPropagation();
+					this.openLightbox(trigger as HTMLElement);
+				});
+
+				trigger.addEventListener('keydown', (e: KeyboardEvent) => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						e.stopPropagation();
+						this.openLightbox(trigger as HTMLElement);
+					}
+				});
+			});
+
+			const closeButtons = document.querySelectorAll('[data-lightbox-close]');
+			closeButtons.forEach((btn) => {
+				btn.addEventListener('click', (e) => {
+					e.stopPropagation();
+					this.closeLightbox();
+				});
+			});
+
+			const images = document.querySelectorAll('[data-lightbox-image]');
+			images.forEach((img) => {
+				img.addEventListener('click', (e) => {
+					e.stopPropagation();
+				});
+			});
+
+			const contentDivs = document.querySelectorAll('.lightbox-content');
+			contentDivs.forEach((content) => {
+				content.addEventListener('click', (e) => {
+					if (e.target === content) {
+						this.closeLightbox();
+					}
+				});
+			});
+
+			const overlays = document.querySelectorAll('.lightbox-overlay');
+			overlays.forEach((overlay) => {
+				overlay.addEventListener('click', () => {
+					this.closeLightbox();
+				});
+			});
+		}
+
+		private setupGlobalHandlers() {
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && this.activeModal?.open) {
+					this.closeLightbox();
+				}
+			});
+		}
+
+		private openLightbox(trigger: HTMLElement) {
+			const modal = trigger.nextElementSibling as HTMLDialogElement;
+			if (!modal || !modal.hasAttribute('data-lightbox-modal')) return;
+
+			this.lastFocusedElement = trigger as HTMLElement;
+			this.activeModal = modal;
+
+			// Prevent body scroll
+			document.body.style.overflow = 'hidden';
+
+			modal.showModal();
+
+			// Focus close button for keyboard accessibility
+			const closeBtn = modal.querySelector('[data-lightbox-close]') as HTMLButtonElement;
+			if (closeBtn) {
+				closeBtn.focus();
+			}
+		}
+
+		private closeLightbox() {
+			if (!this.activeModal) return;
+
+			this.activeModal.close();
+			this.activeModal = null;
+
+			// Restore body scroll
+			document.body.style.overflow = '';
+
+			// Return focus to the clicked image
+			if (this.lastFocusedElement) {
+				this.lastFocusedElement.focus();
+				this.lastFocusedElement = null;
+			}
+		}
+	}
+
+	// Initialize on page load
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', () => {
+			new LightboxManager();
+		});
+	} else {
+		new LightboxManager();
+	}
+
+	// Re-initialize on Astro page transitions (client-side routing)
+	document.addEventListener('astro:after-swap', () => {
+		new LightboxManager();
+	});
+</script>
