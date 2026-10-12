@@ -17,7 +17,7 @@ const mediaItems = [{ src: imagePath, alt: `${title} image` }];
 	<h3 class="display">{title}</h3>
 	<div class="decision-body">
 		<div>
-			{paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+			{paragraphs.map((paragraph) => <p set:html={paragraph} />)}
 		</div>
 		<slot name="callout" />
 	</div>
@@ -25,7 +25,7 @@ const mediaItems = [{ src: imagePath, alt: `${title} image` }];
 		{mediaItems.map((item) => (
 			item.src ? (
 				<Lightbox src={item.src} alt={item.alt}>
-					<img class="decision-image" src={item.src} alt={item.alt} loading="lazy" />
+					<img class="decision-image image-reveal" src={item.src} alt={item.alt} loading="lazy" />
 				</Lightbox>
 			) : (
 				<div class="decision-image placeholder" role="img" aria-label={`${item.alt}. Intended image path: ${item.src}`}>

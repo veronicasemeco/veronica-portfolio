@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Callout from "../../components/Callout.astro";
 import CaseStudyHero from "../../components/CaseStudyHero.astro";
 import CaseStudyMeta from "../../components/CaseStudyMeta.astro";
+import ImpactMetrics from "../../components/ImpactMetrics.astro";
 import ImageBlock from "../../components/ImageBlock.astro";
 import KeyDecision from "../../components/KeyDecision.astro";
 import ResultCards from "../../components/ResultCards.astro";
@@ -21,6 +22,9 @@ import SiteHeader from "../../components/SiteHeader.astro";
 				<CaseStudyHero
 					title="NAVIT’s mobility platform"
 					imagePath="/images/navit/navit-hero.png"
+					videoWebm="/images/navit/navit-hero.webm"
+					videoMp4="/images/navit/navit-hero.mp4"
+					posterImagePath="/images/navit/navit-hero.png"
 				/>
 
 				<section class="intro">
@@ -42,7 +46,14 @@ import SiteHeader from "../../components/SiteHeader.astro";
 
 					<section class="intro-card">
 						<h2 class="display">Impact</h2>
-						<ImageBlock src="/images/navit/navit-impact.png" alt="NAVIT impact overview" aspect="shallow" />
+						<ImpactMetrics
+							metrics={[
+								{ value: "31% → 49%", label: "multi-product activation", emphasis: "multi-product activation" },
+								{ value: "−50%", label: "support tickets for allocation & purchase history", emphasis: "support tickets" },
+								{ value: "30–50%", label: "faster design-dev iteration", emphasis: "faster" },
+								{ value: "+90%", label: "user adoption by 2025", emphasis: "user adoption" },
+							]}
+						/>
 						<ResultCards
 							results={[
 								{ label: "Multi-product activation increased", detail: "31% → 49% after the allocation redesign." },
@@ -213,8 +224,8 @@ import SiteHeader from "../../components/SiteHeader.astro";
 				</section>
 				</section>
 			</main>
-			<SiteFooter />
 	</div>
+	<SiteFooter />
 </Layout>
 
 <style>

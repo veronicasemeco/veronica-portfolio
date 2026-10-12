@@ -1,6 +1,7 @@
 ---
 interface TimelineEntry {
 	company: string;
+	companyUrl?: string;
 	role: string;
 	location: string;
 	period: string;
@@ -19,7 +20,13 @@ const { entries } = Astro.props;
 		<li class="timeline-item">
 			<div class="timeline-marker" aria-hidden="true"></div>
 			<div class="timeline-content">
-				<p class="eyebrow timeline-company">{entry.company}</p>
+				<p class="eyebrow timeline-company">
+					{entry.companyUrl ? (
+						<a href={entry.companyUrl} target="_blank" rel="noreferrer">{entry.company}</a>
+					) : (
+						entry.company
+					)}
+				</p>
 				<h3 class="display">{entry.role}</h3>
 				<h4 class="timeline-detail">{entry.location}, {entry.period}</h4>
 				<p>{entry.description}</p>
@@ -27,6 +34,68 @@ const { entries } = Astro.props;
 		</li>
 	))}
 </ol>
+
+<script>
+	const timelines = document.querySelectorAll<HTMLOListElement>(".timeline");
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+	if (!reducedMotion.matches) {
+		timelines.forEach((timeline) => {
+			const items = Array.from(timeline.querySelectorAll<HTMLElement>(".timeline-item"));
+			const firstItem = items[0];
+
+			if (!firstItem) return;
+
+			timeline.classList.add("timeline--enhanced");
+			firstItem.classList.add("is-active");
+
+			const updateProgress = () => {
+				const bounds = timeline.getBoundingClientRect();
+				const activationPoint = window.innerHeight * 0.72;
+				const progress = Math.min(1, Math.max(0, (activationPoint - bounds.top) / bounds.height));
+				timeline.style.setProperty("--timeline-progress", `${progress * 100}%`);
+			};
+
+			let progressFrame = 0;
+			const scheduleProgressUpdate = () => {
+				if (progressFrame) return;
+				progressFrame = requestAnimationFrame(() => {
+					updateProgress();
+					progressFrame = 0;
+				});
+			};
+
+			updateProgress();
+			window.addEventListener("scroll", scheduleProgressUpdate, { passive: true });
+			window.addEventListener("resize", scheduleProgressUpdate, { passive: true });
+
+			if ("IntersectionObserver" in window) {
+				const hasReachedActivationPoint = new WeakSet<Element>();
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add("is-active");
+								hasReachedActivationPoint.add(entry.target);
+							} else if (
+								hasReachedActivationPoint.has(entry.target) &&
+								entry.rootBounds &&
+								entry.boundingClientRect.top >= entry.rootBounds.top
+							) {
+								entry.target.classList.remove("is-active");
+							}
+						});
+					},
+					{ rootMargin: "-72% 0px -27% 0px", threshold: 0 },
+				);
+
+				items.forEach((item) => observer.observe(item));
+			} else {
+				items.forEach((item) => item.classList.add("is-active"));
+			}
+		});
+	}
+</script>
 
 <style>
 	.timeline {
@@ -48,6 +117,17 @@ const { entries } = Astro.props;
 		width: 0.5px;
 	}
 
+	.timeline::after {
+		background: var(--color-line-primary);
+		content: "";
+		height: var(--timeline-progress, 0%);
+		left: 5px;
+		position: absolute;
+		top: 0;
+		transition: height 100ms cubic-bezier(0.22, 1, 0.36, 1);
+		width: 1px;
+	}
+
 	.timeline-item {
 		display: grid;
 		gap: var(--space-8);
@@ -66,8 +146,34 @@ const { entries } = Astro.props;
 		z-index: 1;
 	}
 
+	.timeline--enhanced .timeline-marker {
+		transition: background-color 600ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.timeline--enhanced .timeline-content {
+		opacity: 0;
+		transition: opacity 650ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.timeline-item.is-active .timeline-marker {
+		background: var(--color-line-primary);
+	}
+
+	.timeline-item.is-active .timeline-content {
+		opacity: 1;
+	}
+
 	.timeline-company {
 		font-weight: 500;
+	}
+
+	.timeline-company a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.timeline-company a:hover {
+		text-decoration: underline;
 	}
 
 	.timeline-content {
@@ -106,6 +212,20 @@ const { entries } = Astro.props;
 
 		h3 {
 			font-size: var(--text-s);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.timeline::after {
+			height: 100%;
+		}
+
+		.timeline-marker {
+			background: var(--color-line-primary);
+		}
+
+		.timeline-content {
+			opacity: 1;
 		}
 	}
 </style>

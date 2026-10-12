@@ -14,22 +14,22 @@ import SiteHeader from "../components/SiteHeader.astro";
 			<SiteHeader />
 			<main id="main">
 				<section class="hero" aria-labelledby="hero-title">
-					<div class="hero-line">
-						<h1 id="hero-title" class="display">Complex products</h1>
+					<div class="hero-intro-stage">
+						<div class="hero-line">
+							<h1 id="hero-title" class="display">Complex products</h1>
+						</div>
+						<div class="hero-statement display">
+							<span aria-hidden="true">→</span>
+							<span>clear experiences.</span>
+						</div>
 					</div>
-					<div class="hero-statement display">
-						<span aria-hidden="true">→</span>
-						<span>clear experiences.</span>
+					<div class="hero-scroll-content">
+						<p class="hero-copy">Complex products need more than good screens.</p>
+						<p>
+							The most challenging product work isn't usually visual. It's making sense of competing constraints, unclear requirements, stakeholder priorities, technical realities, and user needs.
+						</p>
+						<p>I help teams bring structure to that complexity.</p>
 					</div>
-					<p class="hero-copy">
-						Complex products need more than good screens.
-The most challenging product work isn't usually visual. It's making sense of competing constraints, unclear requirements, stakeholder priorities, technical realities, and user needs.
-
-
-					</p>
-					<p>
-I help teams bring structure to that complexity.
-					</p>
 				</section>
 
 				<div id="work">
@@ -38,32 +38,31 @@ I help teams bring structure to that complexity.
 						title="Redesigning NAVIT’s Mobility Platform"
 						description="Helping a fast-moving startup turn fragmented mobility benefit flows into a clearer platform for employees and HR teams."
 						href="/work/navit-platform/"
-						hoverImage="/images/homepage/navit-platform-card.webp"
+						imagePath="/images/homepage/navit-hero.png"
 						tags={["Design Foundations", "UX Strategy", "Mobile App + Dashboard", "Design Foundations"]}
 					/>
 					<ProjectCard
 						title="Building NAVIT’s first continuous research loop"
 						description="Creating a lightweight research system to bring end-user feedback into product decisions."
 						href="/work/navit-research-loop/"
-						hoverImage="/images/homepage/navit-research-card.webp"
-						tags={["UX Research", "Research Ops", "Product Discovery", "SaaS"]}
+						imagePath="/images/homepage/navit-research-hero.png"
+						tags={["UX Research", "Research Ops", "AI-assisted synthesis", "SaaS"]}
 					/>
 					<ProjectCard
 						title="From catalog browsing to fit-guided shopping"
 						description="Moving from a generic swimwear catalog to a fit-guided shopping experience."
 						href="/work/haisabikini/"
-						hoverImage="/images/homepage/haisa-card.webp"
+						imagePath="/images/homepage/haisa-hero.png"
 						tags={["E-commerce Strategy", "UX", "IA", "Product Data", "Shopify"]}
 					/>
 					<ProjectCard
-						title="Archive"
+						title="Earlier work"
 						description="Earlier brand, web, and product work from agency, freelance, and startup projects."
 						href="https://www.veronicasemeco.com/more-case-studies"
-						interactive
 					/>
 				</div>
 
-				<section id="about" class="what-i-bring dark-section" aria-labelledby="what-i-bring-title">
+				<section id="about" class="what-i-bring" aria-labelledby="what-i-bring-title">
 					<div class="what-i-bring-inner">
 						<h2 id="what-i-bring-title" class="display">
 							<a class="what-i-bring-link" href="/about/">
@@ -73,8 +72,7 @@ I help teams bring structure to that complexity.
 						</h2>
 						<div class="what-i-bring-content">
 							<p>
-								13+ years across UX, product, and brand, with recent work in B2B SaaS, mobility
-								benefits, e-commerce, and AI-supported design workflows.
+								13+ years across UX, product, and brand, with recent work in B2B SaaS, mobility benefits, e-commerce, and AI-supported research and design workflows.
 							</p>
 							<ul>
 								<li>Product design for complex flows</li>
@@ -87,37 +85,53 @@ I help teams bring structure to that complexity.
 					</div>
 				</section>
 
-				<section id="ai-lab" class="ai-lab section" aria-labelledby="ai-lab-title">
-					<a class="ai-lab-link display" href="/ai-lab/" id="ai-lab-title">
-						<span>AI Lab</span>
-						<span aria-hidden="true">→</span>
-					</a>
-					<p>
-						Practical experiments in AI-assisted design work, from prototype prompts and coded tests to
-						research synthesis and data storytelling.
-					</p>
-				</section>
+				<!-- I use AI as a design and development partner. Product judgment is all mine :) -->
 			</main>
-			<SiteFooter />
 	</div>
+	<SiteFooter />
 </Layout>
 
 <style>
 	.hero {
+		isolation: isolate;
+	}
+
+	.hero-intro-stage {
 		background: var(--color-surface-primary);
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-8);
-		min-height: 970px;
+		height: 100vh;
+		height: 100svh;
+		min-height: 638px;
 		padding: var(--layout-section-y) var(--layout-page-padding);
+		position: sticky;
+		top: 0;
+		z-index: 0;
+	}
+
+	.hero-scroll-content {
+		background: var(--color-surface-primary);
+		color: var(--color-text-primary);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-8);
+		min-height: 68vh;
+		min-height: 68svh;
+		padding: var(--layout-section-y) var(--layout-page-padding);
+		position: relative;
+		z-index: 1;
 	}
 
 	.hero-line h1 {
+		animation: hero-title-in 1886ms cubic-bezier(0, 0, 0.58, 1) both;
 		font-size: var(--text-xxl);
+		will-change: filter, opacity;
 	}
 
 	.hero-statement {
 		align-items: center;
+		animation: hero-statement-in 1200ms cubic-bezier(0.5, 1.7, 0.3, 1) 700ms both;
 		border-top: 1px solid var(--color-line-primary);
 		display: flex;
 		font-size: var(--text-xxl);
@@ -132,6 +146,30 @@ I help teams bring structure to that complexity.
 		max-width: 58.5rem;
 	}
 
+	@keyframes hero-title-in {
+		from {
+			filter: blur(65px);
+			opacity: 0;
+		}
+
+		to {
+			filter: blur(0);
+			opacity: 1;
+		}
+	}
+
+	@keyframes hero-statement-in {
+		from {
+			opacity: 0;
+			transform: translateX(clamp(-700px, -70vw, -180px));
+		}
+
+		to {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+
 	.hero-copy {
 		border-top: 1px solid var(--color-line-primary);
 		color: var(--color-text-primary);
@@ -143,7 +181,16 @@ I help teams bring structure to that complexity.
 		width: 100%;
 	}
 
+	.hero-scroll-content > p:not(.hero-copy) {
+		font-size: var(--text-s);
+		line-height: var(--leading-ui);
+		margin: 0;
+		max-width: 70.75rem;
+	}
+
 	.what-i-bring {
+		background: var(--color-surface-primary);
+		color: var(--color-text-primary);
 		padding: var(--layout-section-y) var(--layout-page-padding);
 	}
 
@@ -151,6 +198,10 @@ I help teams bring structure to that complexity.
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-8);
+	}
+
+	.what-i-bring-inner > * {
+		transition: transform 360ms ease-in-out;
 	}
 
 	.what-i-bring h2 {
@@ -161,7 +212,6 @@ I help teams bring structure to that complexity.
 		align-items: center;
 		display: flex;
 		gap: var(--space-6);
-		transition: gap 180ms ease-in-out;
 	}
 
 	.what-i-bring-link:focus-visible {
@@ -170,9 +220,9 @@ I help teams bring structure to that complexity.
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		.what-i-bring-link:hover,
-		.what-i-bring-link:focus-visible {
-			gap: calc(var(--space-10) * 2);
+		.what-i-bring:hover .what-i-bring-inner > *,
+		.what-i-bring:has(.what-i-bring-link:focus-visible) .what-i-bring-inner > * {
+			transform: translateX(24px);
 		}
 	}
 
@@ -187,7 +237,7 @@ I help teams bring structure to that complexity.
 
 	.what-i-bring p,
 	.what-i-bring li {
-		color: var(--color-line-secondary);
+		color: var(--color-text-primary);
 		font-size: var(--text-s);
 		line-height: var(--leading-ui);
 	}
@@ -201,67 +251,34 @@ I help teams bring structure to that complexity.
 		padding: 0;
 	}
 
-	.ai-lab {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-8);
-		overflow: hidden;
-		transition: background-color 180ms ease-in-out;
-	}
-
-	.ai-lab-link {
-		align-items: center;
-		display: flex;
-		font-size: var(--text-l);
-		gap: var(--space-6);
-		transition: color 180ms ease-in-out, font-weight 180ms ease-in-out, gap 180ms ease-in-out;
-	}
-
-	.ai-lab-link:focus-visible {
-		outline: 2px solid currentColor;
-		outline-offset: var(--space-2);
-	}
-
-	.ai-lab p {
-		color: var(--color-text-primary);
-		font-size: var(--text-m);
-		line-height: var(--leading-body);
-		max-width: var(--layout-measure);
-		transition: color 180ms ease-in-out;
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.ai-lab:hover,
-		.ai-lab:has(.ai-lab-link:focus-visible) {
-			background: var(--color-button-bg-primary);
-		}
-
-		.ai-lab:hover .ai-lab-link,
-		.ai-lab:has(.ai-lab-link:focus-visible) .ai-lab-link {
-			color: var(--color-surface-primary);
-			font-weight: 500;
-			gap: var(--space-10);
-		}
-
-		.ai-lab:hover p,
-		.ai-lab:has(.ai-lab-link:focus-visible) p {
-			color: var(--color-surface-primary);
-		}
-	}
-
 	@media (prefers-reduced-motion: reduce) {
-		.ai-lab,
-		.ai-lab-link,
-		.ai-lab p,
-		.what-i-bring-link {
+		.hero-intro-stage {
+			position: relative;
+			top: auto;
+		}
+
+		.hero-line h1,
+		.hero-statement {
+			animation: none;
+			filter: none;
+			opacity: 1;
+			transform: none;
+			will-change: auto;
+		}
+
+		.what-i-bring-inner > * {
 			transition: none;
 		}
 	}
 
 	@media (max-width: 760px) {
-		.hero {
-			gap: var(--space-8);
+		.hero-intro-stage {
 			min-height: 638px;
+		}
+
+		.hero-scroll-content {
+			min-height: 72vh;
+			min-height: 72svh;
 		}
 
 		.hero-statement {

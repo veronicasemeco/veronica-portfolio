@@ -8,7 +8,6 @@
 	--color-line-secondary: #b7b7cf;
 	--color-button-bg-primary: #150e32;
 	--color-button-label-primary: #f3f3fa;
-	--color-overlay-project-card: rgba(86, 91, 130, 0.46);
 
 	--font-display: "Lora", Georgia, "Times New Roman", serif;
 	--font-text: "Rubik", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -49,6 +48,7 @@
 	--layout-content-wide: 1440px;
 	--layout-measure: 912px;
 	--layout-aside: 331px;
+	--footer-reveal-height: 304px;
 }
 
 @media (max-width: 760px) {
@@ -61,5 +61,17 @@
 		--layout-section-y: 120px;
 		--layout-measure: 100%;
 		--layout-aside: 100%;
+	}
+}
+
+@media (max-width: 760px) {
+	:root {
+		--footer-reveal-height: 220px;
+	}
+}
+
+@media (max-width: 720px) {
+	:root {
+		--footer-reveal-height: 336px;
 	}
 }

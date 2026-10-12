@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Callout from "../../components/Callout.astro";
 import CaseStudyHero from "../../components/CaseStudyHero.astro";
 import CaseStudyMeta from "../../components/CaseStudyMeta.astro";
+import ImpactMetrics from "../../components/ImpactMetrics.astro";
 import ImageBlock from "../../components/ImageBlock.astro";
 import KeyDecision from "../../components/KeyDecision.astro";
 import ResultCards from "../../components/ResultCards.astro";
@@ -43,8 +44,30 @@ import SiteHeader from "../../components/SiteHeader.astro";
 
 				<section class="intro-card">
 					<h2 class="display">Impact</h2>
-					<ImageBlock src="/images/navit-research/navit-research-impact.png" alt="NAVIT research impact overview" aspect="shallow" />
-					
+					<ImpactMetrics
+						metrics={[
+							{
+								value: "+21",
+								label: "NPS point improvement (23 → 44 within six months)",
+								emphasis: "NPS point improvement",
+							},
+							{
+								value: "3.1 → 4.8",
+								label: "App Store rating improved over time",
+								emphasis: "App Store rating improved",
+							},
+							{
+								value: "7–9 hours",
+								label: "per month to run the research loop",
+								emphasis: "research loop",
+							},
+							{
+								value: "72+",
+								label: "user interviews in the first year",
+								emphasis: "user interviews",
+							},
+						]}
+					/>
 				</section>
 
 				<section class="intro-card">
@@ -99,7 +122,7 @@ paragraphs={[
 					title="Talk to the users most affected by the issues"
 paragraphs={[
 	"I focused outreach on users closest to recurring frustration: low-score NPS respondents, users connected to repeated support issues, and high-priority accounts.",
-	"Users could choose a 30-minute call or async email feedback. Calls were recorded and summarized with AI-assisted notes, then manually reviewed so the findings kept context and nuance.",
+	"Users could choose a 30-minute call or async email feedback. Calls were recorded and summarized with AI-assisted notes, then manually reviewed and grouped into themes so the findings kept context, nuance, and product relevance.",
 ]}
 					imagePath="/images/navit-research/navit-research-outreach-flow.png"
 				>
@@ -154,8 +177,8 @@ paragraphs={[
 				/>
 			</section>
 		</main>
-		<SiteFooter />
 	</div>
+	<SiteFooter />
 </Layout>
 
 <style>

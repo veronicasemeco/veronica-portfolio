@@ -6,15 +6,33 @@ interface Props {
 	description: string;
 	href?: string;
 	tags?: string[];
-	hoverImage?: string;
-	interactive?: boolean;
+	imagePath?: string;
+	imagePosition?: string;
 }
 
-const { title, description, href = "#", tags = [], hoverImage, interactive = false } = Astro.props;
-const hoverImageStyle = hoverImage ? `--project-card-image: url("${hoverImage}");` : undefined;
+const {
+	title,
+	description,
+	href = "#",
+	tags = [],
+	imagePath,
+	imagePosition = "center",
+} = Astro.props;
+const imageStyle = imagePath
+	? `--project-card-image: url("${imagePath}"); --project-card-image-position: ${imagePosition};`
+	: undefined;
 ---
 
-<article class:list={["project-card", "section--ruled", (hoverImage || interactive) && "project-card--interactive", hoverImage && "project-card--with-image"]} style={hoverImageStyle}>
+<article
+	class:list={["project-card", "project-card--interactive", "section--ruled", imagePath && "project-card--with-image"]}
+	style={imageStyle}
+>
+	{imagePath && (
+		<>
+			<span class="project-card__image" aria-hidden="true"></span>
+			<span class="project-card__overlay" aria-hidden="true"></span>
+		</>
+	)}
 	<a class="project-title" href={href}>
 		<span>{title}</span>
 		<span aria-hidden="true">→</span>
@@ -42,30 +60,38 @@ const hoverImageStyle = hoverImage ? `--project-card-image: url("${hoverImage}")
 		transition: background-color 180ms ease-in-out;
 	}
 
-	.project-card::before,
-	.project-card::after {
-		content: "";
+	.project-card > a,
+	.project-card > p,
+	.project-card > .tags {
+		position: relative;
+		z-index: 2;
+	}
+
+	.project-card > .project-card__image,
+	.project-card > .project-card__overlay {
 		inset: 0;
-		opacity: 0;
 		pointer-events: none;
 		position: absolute;
-		transition: opacity 180ms ease-in-out;
 	}
 
-	.project-card::before {
+	.project-card__image {
 		background-image: var(--project-card-image);
-		background-position: center;
+		background-position: var(--project-card-image-position, center);
 		background-size: cover;
-		transform: scale(1.01);
+		transform: translateY(12px) scale(1.02);
+		transition: opacity 420ms ease-out, transform 420ms ease-out;
+		z-index: 0;
 	}
 
-	.project-card::after {
-		background: var(--color-overlay-project-card);
-	}
-
-	.project-card > * {
-		position: relative;
+	.project-card__overlay {
+		background: linear-gradient(82deg, #150E32 39.9%, #3D4160 92.49%);
+		opacity: 0;
+		transition: opacity 420ms ease-out;
 		z-index: 1;
+	}
+
+	.project-card--with-image .project-card__image {
+		opacity: 0;
 	}
 
 	.project-title {
@@ -76,8 +102,9 @@ const hoverImageStyle = hoverImage ? `--project-card-image: url("${hoverImage}")
 		font-size: var(--text-l);
 		gap: var(--space-6);
 		line-height: var(--leading-tight);
+		position: static;
 		text-decoration: none;
-		transition: color 180ms ease-in-out, font-weight 180ms ease-in-out, gap 180ms ease-in-out;
+		transition: color 180ms ease-in-out, gap 180ms ease-in-out, transform 360ms ease-in-out;
 		width: 100%;
 	}
 
@@ -90,12 +117,19 @@ const hoverImageStyle = hoverImage ? `--project-card-image: url("${hoverImage}")
 		max-width: min(100%, 72rem);
 	}
 
+	.project-title::after {
+		content: "";
+		inset: 0;
+		position: absolute;
+		z-index: 2;
+	}
+
 	p {
 		color: var(--color-text-primary);
 		font-size: var(--text-m);
 		line-height: var(--leading-body);
 		max-width: var(--layout-measure);
-		transition: color 180ms ease-in-out;
+		transition: color 180ms ease-in-out, transform 360ms ease-in-out;
 	}
 
 	.tags {
@@ -108,49 +142,99 @@ const hoverImageStyle = hoverImage ? `--project-card-image: url("${hoverImage}")
 	}
 
 	.tags :global(.tag) {
-		transition: border-color 180ms ease-in-out, color 180ms ease-in-out;
+		transition: border-color 180ms ease-in-out, color 180ms ease-in-out, transform 360ms ease-in-out;
+	}
+
+	.project-card--interactive:focus-within {
+		background: var(--color-button-bg-primary);
+	}
+
+	.project-card--interactive:focus-within .project-title {
+		color: var(--color-surface-primary);
+		gap: var(--space-10);
+	}
+
+	.project-card--interactive:focus-within .project-title span,
+	.project-card--interactive:focus-within p,
+	.project-card--interactive:focus-within .tags {
+		transform: translateX(24px);
+	}
+
+	.project-card--interactive:focus-within p {
+		color: var(--color-surface-primary);
+	}
+
+	.project-card--interactive:focus-within .tags :global(.tag) {
+		border-color: var(--color-line-primary);
+		color: var(--color-line-secondary);
+	}
+
+	.project-card--with-image:focus-within .project-card__image,
+	.project-card--with-image:focus-within .project-card__overlay {
+		opacity: 1;
+	}
+
+	.project-card--with-image:focus-within .project-card__overlay {
+		opacity: 0.6;
+	}
+
+	.project-card--with-image:focus-within .project-card__image {
+		transform: translateY(0) scale(1.02);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		.project-card--interactive:hover,
-		.project-card--interactive:has(.project-title:focus-visible) {
+		.project-card--interactive:hover {
 			background: var(--color-button-bg-primary);
 		}
 
-		.project-card--with-image:hover::before,
-		.project-card--with-image:hover::after,
-		.project-card--with-image:has(.project-title:focus-visible)::before,
-		.project-card--with-image:has(.project-title:focus-visible)::after {
-			opacity: 1;
-		}
-
-		.project-card--interactive:hover .project-title,
-		.project-card--interactive:has(.project-title:focus-visible) .project-title {
+		.project-card--interactive:hover .project-title {
 			color: var(--color-surface-primary);
-			font-weight: 500;
 			gap: var(--space-10);
 		}
 
+		.project-card--interactive:hover .project-title span,
 		.project-card--interactive:hover p,
-		.project-card--interactive:has(.project-title:focus-visible) p {
+		.project-card--interactive:hover .tags {
+			transform: translateX(24px);
+		}
+
+		.project-card--interactive:hover p {
 			color: var(--color-surface-primary);
 		}
 
-		.project-card--interactive:hover .tags :global(.tag),
-		.project-card--interactive:has(.project-title:focus-visible) .tags :global(.tag) {
+		.project-card--interactive:hover .tags :global(.tag) {
 			border-color: var(--color-line-primary);
 			color: var(--color-line-secondary);
+		}
+
+		.project-card--with-image:hover .project-card__image,
+		.project-card--with-image:hover .project-card__overlay {
+			opacity: 1;
+		}
+
+		.project-card--with-image:hover .project-card__overlay {
+			opacity: 0.6;
+		}
+
+		.project-card--with-image:hover .project-card__image {
+			transform: translateY(0) scale(1.02);
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.project-card,
-		.project-card::before,
-		.project-card::after,
+		.project-card__image,
+		.project-card__overlay,
 		.project-title,
+		.project-title span,
 		p,
+		.tags,
 		.tags :global(.tag) {
 			transition: none;
+		}
+
+		.project-card__image {
+			transform: translateY(0) scale(1);
 		}
 	}
 

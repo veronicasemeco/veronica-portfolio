@@ -17,7 +17,7 @@ const { src, alt } = Astro.props;
 		<button class="lightbox-close" aria-label="Close lightbox" data-lightbox-close>
 			<span aria-hidden="true">×</span>
 		</button>
-		<img class="lightbox-image" src={src} alt={alt} data-lightbox-image />
+		<img class="lightbox-image no-image-reveal" src={src} alt={alt} data-lightbox-image />
 	</div>
 </dialog>
 

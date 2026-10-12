@@ -15,6 +15,7 @@ const timelineEntries = [
 	},
 	{
 		company: "NAVIT",
+		companyUrl: "https://navit.com/",
 		role: "Product Designer → Senior Product Designer",
 		location: "Berlin",
 		period: "2023 - 2025",
@@ -23,6 +24,7 @@ const timelineEntries = [
 	},
 	{
 		company: "FORMEL Skin",
+		companyUrl: "https://www.formelskin.de/",
 		role: "Senior UX/UI Designer",
 		location: "Berlin",
 		period: "2022 - 2023",
@@ -31,6 +33,7 @@ const timelineEntries = [
 	},
 	{
 		company: "Wunderman Thompson, WPP",
+		companyUrl: "https://www.wpp.com/en",
 		role: "Design Director",
 		location: "New York City",
 		period: "2017 - 2019",
@@ -39,6 +42,7 @@ const timelineEntries = [
 	},
 	{
 		company: "Saatchi & Saatchi, Publicis Groupe",
+		companyUrl: "https://www.saatchiwellness.com/",
 		role: "Art Director → Senior Art Director",
 		location: "New York City",
 		period: "2014 - 2017",
@@ -47,6 +51,7 @@ const timelineEntries = [
 	},
 	{
 		company: "Leibowitz Branding & Design",
+		companyUrl: "http://www.leibowitz.co/",
 		role: "Graphic Designer → Art Director",
 		location: "New York City",
 		period: "2007 - 2014",
@@ -78,17 +83,9 @@ const principles = [
 	},
 ];
 
-const teams = [
-	"NAVIT",
-	"FORMEL Skin",
-	"Pfizer",
-	"TIAA",
-	"Felmo",
-	"Novartis",
-	"Wunderman Thompson",
-	"Saatchi & Saatchi Wellness",
-	"The Parnell Plan",
-];
+const teamLogos = Array.from({ length: 12 }, (_, index) =>
+	String(index + 1).padStart(2, "0"),
+);
 ---
 
 <Layout
@@ -104,13 +101,12 @@ const teams = [
 				</h1>
 				<div class="intro-copy">
 					<p>
-						I’m a Senior Product Designer working across research, UX strategy, product flows, and polished UI, with recent work in SaaS, mobility benefits, e-commerce, and AI-assisted prototyping.
-					</p>
+						 I’m a Senior Product Designer working across research, UX strategy, product flows, and polished UI, with recent work in SaaS, mobility benefits, e-commerce, and complex product systems.</p>
 					
 					<p>
 					I’ve worked across agencies, startups, and in-house product teams on products where the challenge was rarely just the interface. It was understanding the system around it: user needs, business priorities, technical constraints, internal workflows, and the trade-offs required to move forward.</p>
 				<p>
-						I help teams turn complexity into clear, shippable product experiences.</p>
+						<strong>I help teams turn complexity into clear product experiences.</strong></p>
 				</div>
 			</section>
 
@@ -133,32 +129,42 @@ const teams = [
 			<section class="teams-section section--ruled" aria-labelledby="teams-heading">
 				<h2 id="teams-heading" class="display">Teams I’ve worked with</h2>
 				<ul class="logo-grid">
-					{teams.map((team) => (
-						<li>{team}</li>
+					{teamLogos.map((number) => (
+						<li>
+							<img
+								class="image-reveal"
+								src={`/images/about/Logo_collab_${number}.svg`}
+								alt={`Collaborating team logo ${number}`}
+								loading="lazy"
+							/>
+						</li>
 					))}
 				</ul>
 			</section>
 
 			<section class="personal-section section--ruled" aria-labelledby="personal-heading">
-				<div
-					class="portrait-placeholder"
-					aria-label="Portrait placeholder for Veronica Semeco"
-					role="img"
-				></div>
+				<div class="portrait">
+					<img
+						class="image-reveal"
+						src="/images/about/veronica_semeco_small.jpg"
+						alt="Veronica Semeco"
+						loading="lazy"
+					/>
+				</div>
 				<div class="personal-copy">
 					<h2 id="personal-heading" class="display">Things that shape me</h2>
 					<p>
 						I was born and raised in Venezuela, lived for many years in the U.S.,
 						and now call Germany home. Outside of work, I’m a long-distance
-						runner, a thru-hike fan, and someone who loves learning new crafts.
+						runner and coach, a thru-hike fan, and someone who loves learning new crafts.
 						These things teach me patience, adaptability, and a steady, long-view
 						approach: the same way I show up in my work.
 					</p>
 				</div>
 			</section>
 		</main>
-		<SiteFooter />
 	</div>
+	<SiteFooter />
 </Layout>
 
 <style>
@@ -251,7 +257,7 @@ const teams = [
 	.logo-grid {
 		display: grid;
 		gap: 0;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -259,19 +265,17 @@ const teams = [
 
 	.logo-grid li {
 		align-items: center;
-		border-top: 0.5px solid var(--color-line-secondary);
-		color: var(--color-text-secondary);
 		display: flex;
-		font-size: var(--text-s);
 		justify-content: center;
-		line-height: var(--leading-tight);
 		min-height: 112px;
 		padding: var(--space-6);
-		text-align: center;
 	}
 
-	.logo-grid li:nth-child(-n + 3) {
-		border-top: 0;
+	.logo-grid img {
+		display: block;
+		height: auto;
+		max-width: 200px;
+		width: 100%;
 	}
 
 	.personal-section {
@@ -280,20 +284,29 @@ const teams = [
 		grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
 	}
 
-	.portrait-placeholder {
+	.portrait {
 		aspect-ratio: 4 / 5;
-		background:
-			linear-gradient(
-				rgba(243, 243, 250, 0.32),
-				rgba(243, 243, 250, 0.32)
-			),
-			url("/images/about/veronica-portrait.webp"),
-			color-mix(in srgb, var(--color-line-secondary) 42%, var(--color-surface-primary));
-		background-position: center;
-		background-size: cover;
 		border: 0.5px solid var(--color-line-secondary);
 		max-width: 360px;
 		min-height: 320px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.portrait img {
+		height: 100%;
+		inset: 0;
+		object-fit: cover;
+		position: absolute;
+		width: 100%;
+	}
+
+	.portrait::after {
+		background: rgba(243, 243, 250, 0.32);
+		content: "";
+		inset: 0;
+		pointer-events: none;
+		position: absolute;
 	}
 
 	.personal-copy {
@@ -332,23 +345,19 @@ const teams = [
 		}
 
 		.logo-grid {
-			grid-template-columns: 1fr;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 
-		.logo-grid li,
-		.logo-grid li:nth-child(-n + 3) {
-			border-top: 0.5px solid var(--color-line-secondary);
-			justify-content: flex-start;
-			min-height: 72px;
-			padding: var(--space-5) 0;
-			text-align: left;
+		.logo-grid li {
+			min-height: 96px;
+			padding: var(--space-4);
 		}
 
-		.logo-grid li:first-child {
-			border-top: 0;
+		.logo-grid img {
+			max-width: 160px;
 		}
 
-		.portrait-placeholder {
+		.portrait {
 			max-width: none;
 			min-height: 360px;
 		}

@@ -5,17 +5,46 @@ interface Props {
 	title: string;
 	imagePath: string;
 	kicker?: string;
+	videoWebm?: string;
+	videoMp4?: string;
+	posterImagePath?: string;
 }
 
-const { title, imagePath, kicker = "Redesigning" } = Astro.props;
+const {
+	title,
+	imagePath,
+	kicker = "Redesigning",
+	videoWebm,
+	videoMp4,
+	posterImagePath = imagePath,
+} = Astro.props;
+const hasVideo = Boolean(videoWebm || videoMp4);
 ---
 
 <section class="case-hero">
 	<div class="case-hero-content">
 		<h1 class="display">{kicker}</h1>
 		<p class="case-hero-title display">{title}</p>
-		<Lightbox src={imagePath} alt={`${title} hero image`}>
-			<img class="case-hero-image" src={imagePath} alt={`${title} hero image`} loading="lazy" />
+		<Lightbox src={hasVideo ? posterImagePath : imagePath} alt={`${title} hero image`}>
+			{hasVideo ? (
+				<div class="case-hero-media">
+					<img class="case-hero-image image-reveal no-image-reveal" src={posterImagePath} alt="" loading="lazy" />
+					<video
+						class="case-hero-video"
+						data-hero-video
+						muted
+						playsinline
+						preload="metadata"
+						poster={posterImagePath}
+						aria-hidden="true"
+					>
+						{videoWebm && <source src={videoWebm} type="video/webm" />}
+						{videoMp4 && <source src={videoMp4} type="video/mp4" />}
+					</video>
+				</div>
+			) : (
+				<img class="case-hero-image image-reveal no-image-reveal" src={imagePath} alt={`${title} hero image`} loading="lazy" />
+			)}
 		</Lightbox>
 	</div>
 </section>
@@ -48,6 +77,27 @@ const { title, imagePath, kicker = "Redesigning" } = Astro.props;
 		width: 100%;
 	}
 
+	.case-hero-media {
+		border-radius: 8px;
+		overflow: hidden;
+		position: relative;
+		width: 100%;
+	}
+
+	.case-hero-video {
+		height: 100%;
+		inset: 0;
+		object-fit: cover;
+		opacity: 0;
+		position: absolute;
+		transition: opacity 180ms ease-out;
+		width: 100%;
+	}
+
+	.case-hero-media.is-playing .case-hero-video {
+		opacity: 1;
+	}
+
 	@media (max-width: 760px) {
 		.case-hero-title {
 			font-weight: 400;
@@ -60,3 +110,55 @@ const { title, imagePath, kicker = "Redesigning" } = Astro.props;
 		}
 	}
 </style>
+
+<script>
+	let heroVideoObserver: IntersectionObserver | undefined;
+	const mediaPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+	const initializeHeroVideos = () => {
+		const videos = document.querySelectorAll<HTMLVideoElement>("[data-hero-video]");
+		if (!videos.length || !("IntersectionObserver" in window)) return;
+
+		heroVideoObserver ??= new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					if (!entry.isIntersecting || mediaPreference.matches) return;
+
+					if (!(entry.target instanceof HTMLVideoElement)) return;
+					const video = entry.target;
+					const media = video.closest(".case-hero-media");
+					observer.unobserve(video);
+					video.dataset.played = "true";
+
+					video.play().then(
+						() => media?.classList.add("is-playing"),
+						(error: unknown) => console.warn("Case study hero video could not play.", error),
+					);
+				});
+			},
+			{ threshold: 0.25 },
+		);
+
+		videos.forEach((video) => {
+			if (video.dataset.played !== "true" && !mediaPreference.matches) {
+				heroVideoObserver?.observe(video);
+			}
+		});
+	};
+
+	mediaPreference.addEventListener("change", (event) => {
+		document.querySelectorAll<HTMLVideoElement>("[data-hero-video]").forEach((video) => {
+			const media = video.closest(".case-hero-media");
+			if (event.matches) {
+				heroVideoObserver?.unobserve(video);
+				video.pause();
+				media?.classList.remove("is-playing");
+			} else if (video.dataset.played !== "true") {
+				heroVideoObserver?.observe(video);
+			}
+		});
+	});
+
+	initializeHeroVideos();
+	document.addEventListener("astro:page-load", initializeHeroVideos);
+</script>

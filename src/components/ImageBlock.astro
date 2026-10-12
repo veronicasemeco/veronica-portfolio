@@ -19,7 +19,7 @@ const { src, alt, caption, aspect = "wide", placeholder = false } = Astro.props;
 		</div>
 	) : (
 		<Lightbox src={src} alt={alt}>
-			<img src={src} alt={alt} loading="lazy" />
+			<img class="image-reveal" src={src} alt={alt} loading="lazy" />
 		</Lightbox>
 	)}
 	{caption && <figcaption>{caption}</figcaption>}
