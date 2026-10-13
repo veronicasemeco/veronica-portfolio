@@ -5,6 +5,8 @@ interface Props {
 	title: string;
 	description: string;
 	href?: string;
+	target?: string;
+	rel?: string;
 	tags?: string[];
 	imagePath?: string;
 	imagePosition?: string;
@@ -14,6 +16,8 @@ const {
 	title,
 	description,
 	href = "#",
+	target,
+	rel,
 	tags = [],
 	imagePath,
 	imagePosition = "center",
@@ -33,7 +37,7 @@ const imageStyle = imagePath
 			<span class="project-card__overlay" aria-hidden="true"></span>
 		</>
 	)}
-	<a class="project-title" href={href}>
+	<a class="project-title" href={href} target={target} rel={rel}>
 		<span>{title}</span>
 		<span aria-hidden="true">→</span>
 	</a>
