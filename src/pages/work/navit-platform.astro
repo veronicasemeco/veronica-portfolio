@@ -14,7 +14,8 @@ import SiteHeader from "../../components/SiteHeader.astro";
 
 <Layout
 	title="Redesigning NAVIT’s Mobility Platform | Veronica Semeco"
-	description="Case study by Veronica Semeco on redesigning NAVIT's mobility platform for employees and HR teams."
+	description="How I redesigned NAVIT’s employee mobility app and HR dashboard to clarify benefits, budget allocation, and account workflows."
+	socialImage="/images/navit/navit-hero.png"
 >
 	<div class="page">
 			<SiteHeader current="work" />
@@ -22,6 +23,9 @@ import SiteHeader from "../../components/SiteHeader.astro";
 				<CaseStudyHero
 					title="NAVIT’s mobility platform"
 					imagePath="/images/navit/navit-hero.png"
+					imageAlt="NAVIT employee app and HR dashboard screens for managing mobility benefits."
+					imageWidth={2000}
+					imageHeight={1242}
 					videoWebm="/images/navit/navit-hero.webm"
 					videoMp4="/images/navit/navit-hero.mp4"
 					posterImagePath="/images/navit/navit-hero.png"
@@ -77,7 +81,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 								One issue was especially important: the app presented different benefits as if they behaved like prepaid cards. That created false expectations. Users assumed every product worked the same way, even when the underlying rules, timing, and operational handling were different.
 							</p>
 						</div>
-						<ImageBlock src="/images/navit/navit-context.png" alt="NAVIT context screens" aspect="shallow" />
+						<ImageBlock src="/images/navit/navit-context.png" alt="NAVIT employee app screens showing available mobility benefits and benefit details." aspect="shallow" />
 					</section>
 
 					<section class="intro-card">
@@ -127,6 +131,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 						]}
 					
 						imagePath="/images/navit/navit-onboarding-benefits.png"
+						imageAlt="Before-and-after onboarding screens showing benefit introduction, product selection, and budget allocation."
 					/>
 					<KeyDecision
 						number={2}
@@ -138,6 +143,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 						]}
 						
 						imagePath="/images/navit/navit-card-metaphor-before-after.png"
+						imageAlt="Before-and-after comparison of NAVIT’s generic prepaid-card metaphor and product-specific mobility benefits."
 					>
 						<Callout
 	slot="callout"
@@ -154,6 +160,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 						]}
 					
 						imagePath="/images/navit/navit-allocation-current-next.png"
+						imageAlt="Current and upcoming mobility budget allocation states in the NAVIT app."
 					/>
 					<KeyDecision
 						number={4}
@@ -164,6 +171,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 						]}
 						
 						imagePath="/images/navit/navit-history-balance-logic.png"
+						imageAlt="NAVIT transaction history and balance logic for current and upcoming periods."
 					>
 						<Callout
 	slot="callout"
@@ -179,6 +187,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 						]}
 						
 						imagePath="/images/navit/navit-design-system-audit.png"
+						imageAlt="Audit of NAVIT interface components and design-system inconsistencies."
 					/>
 				</section>
 
@@ -191,7 +200,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 							<p>This mattered because every employee-facing benefit had an admin-side counterpart: policy setup, budget rules, reimbursement handling, payment logic, reporting, and support resolution.</p>
 						</div>
 						</div>
-					<ImageBlock src="/images/navit/navit-dashboard.png" alt="NAVIT HR admin dashboard" aspect="dashboard" />
+					<ImageBlock src="/images/navit/navit-dashboard.png" alt="NAVIT HR dashboard for managing employee mobility benefits." aspect="dashboard" />
 				</section>
 
 				<section class="outro">

@@ -6,10 +6,11 @@ interface Props {
 	title: string;
 	paragraphs: string[];
 	imagePath: string;
+	imageAlt: string;
 }
 
-const { number, title, paragraphs, imagePath } = Astro.props;
-const mediaItems = [{ src: imagePath, alt: `${title} image` }];
+const { number, title, paragraphs, imagePath, imageAlt } = Astro.props;
+const mediaItems = [{ src: imagePath, alt: imageAlt }];
 ---
 
 <article class="key-decision">

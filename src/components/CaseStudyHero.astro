@@ -4,6 +4,9 @@ import Lightbox from './Lightbox.astro';
 interface Props {
 	title: string;
 	imagePath: string;
+	imageAlt: string;
+	imageWidth: number;
+	imageHeight: number;
 	kicker?: string;
 	videoWebm?: string;
 	videoMp4?: string;
@@ -13,6 +16,9 @@ interface Props {
 const {
 	title,
 	imagePath,
+	imageAlt,
+	imageWidth,
+	imageHeight,
 	kicker = "Redesigning",
 	videoWebm,
 	videoMp4,
@@ -25,10 +31,18 @@ const hasVideo = Boolean(videoWebm || videoMp4);
 	<div class="case-hero-content">
 		<h1 class="display">{kicker}</h1>
 		<p class="case-hero-title display">{title}</p>
-		<Lightbox src={hasVideo ? posterImagePath : imagePath} alt={`${title} hero image`}>
+		<Lightbox src={hasVideo ? posterImagePath : imagePath} alt={imageAlt}>
 			{hasVideo ? (
 				<div class="case-hero-media">
-					<img class="case-hero-image image-reveal no-image-reveal" src={posterImagePath} alt="" loading="lazy" />
+					<img
+						class="case-hero-image image-reveal no-image-reveal"
+						src={posterImagePath}
+						alt=""
+						width={imageWidth}
+						height={imageHeight}
+						loading="eager"
+						fetchpriority="high"
+					/>
 					<video
 						class="case-hero-video"
 						data-hero-video
@@ -43,7 +57,15 @@ const hasVideo = Boolean(videoWebm || videoMp4);
 					</video>
 				</div>
 			) : (
-				<img class="case-hero-image image-reveal no-image-reveal" src={imagePath} alt={`${title} hero image`} loading="lazy" />
+				<img
+					class="case-hero-image image-reveal no-image-reveal"
+					src={imagePath}
+					alt={imageAlt}
+					width={imageWidth}
+					height={imageHeight}
+					loading="eager"
+					fetchpriority="high"
+				/>
 			)}
 		</Lightbox>
 	</div>

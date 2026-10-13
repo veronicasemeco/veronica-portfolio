@@ -24,11 +24,10 @@ import SiteHeader from "../components/SiteHeader.astro";
 						</div>
 					</div>
 					<div class="hero-scroll-content">
-						<p class="hero-copy">Complex products need more than good screens.</p>
+						<p>Complex products need more than good screens.</p>
 						<p>
 							The most challenging product work isn't usually visual. It's making sense of competing constraints, unclear requirements, stakeholder priorities, technical realities, and user needs.
 						</p>
-						<p>I help teams bring structure to that complexity.</p>
 					</div>
 				</section>
 
@@ -111,16 +110,18 @@ import SiteHeader from "../components/SiteHeader.astro";
 	}
 
 	.hero-scroll-content {
-		background: var(--color-surface-primary);
+		background: color-mix(in srgb, var(--color-surface-primary) 88%, transparent);
+		backdrop-filter: blur(8px);
 		color: var(--color-text-primary);
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-8);
-		min-height: 68vh;
-		min-height: 68svh;
+		min-height: max(100vh, 638px);
+		min-height: max(100svh, 638px);
 		padding: var(--layout-section-y) var(--layout-page-padding);
 		position: relative;
 		z-index: 1;
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	.hero-line h1 {
@@ -170,20 +171,11 @@ import SiteHeader from "../components/SiteHeader.astro";
 		}
 	}
 
-	.hero-copy {
-		border-top: 1px solid var(--color-line-primary);
-		color: var(--color-text-primary);
-		font-size: var(--text-s);
-		line-height: var(--leading-ui);
-		max-width: none;
-		padding-top: var(--space-8);
-		padding-right: max(0px, calc(100% - 70.75rem));
-		width: 100%;
-	}
-
-	.hero-scroll-content > p:not(.hero-copy) {
-		font-size: var(--text-s);
-		line-height: var(--leading-ui);
+	.hero-scroll-content > p {
+		font-family: var(--font-display);
+		font-size: var(--text-mm);
+		font-weight: 400;
+		line-height: var(--leading-tight);
 		margin: 0;
 		max-width: 70.75rem;
 	}
@@ -276,11 +268,6 @@ import SiteHeader from "../components/SiteHeader.astro";
 			min-height: 638px;
 		}
 
-		.hero-scroll-content {
-			min-height: 72vh;
-			min-height: 72svh;
-		}
-
 		.hero-statement {
 			align-items: flex-end;
 			flex-direction: row;
@@ -290,13 +277,15 @@ import SiteHeader from "../components/SiteHeader.astro";
 			text-align: right;
 		}
 
-		.hero-copy {
-			padding-top: var(--space-6);
-		}
-
 		.what-i-bring-content {
 			gap: 48px;
 			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero-statement {
+			animation-delay: 1550ms;
 		}
 	}
 </style>

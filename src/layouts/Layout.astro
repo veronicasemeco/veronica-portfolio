@@ -4,9 +4,22 @@ import "../styles/global.css";
 interface Props {
 	title: string;
 	description: string;
+	socialImage?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+	title,
+	description,
+	socialImage = "/images/homepage/navit-hero.png",
+} = Astro.props;
+const site = Astro.site;
+
+if (!site) {
+	throw new Error("Astro site URL must be configured for canonical and social metadata.");
+}
+
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const socialImageUrl = new URL(socialImage, site).href;
 ---
 
 <!doctype html>
@@ -18,6 +31,16 @@ const { title, description } = Astro.props;
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={socialImageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImageUrl} />
 		<title>{title}</title>
 	</head>
 	<body>

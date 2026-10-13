@@ -7,9 +7,15 @@ interface Props {
 const { src, alt } = Astro.props;
 ---
 
-<div class="lightbox-trigger" data-lightbox-src={src} data-lightbox-alt={alt}>
+<button
+	class="lightbox-trigger"
+	type="button"
+	aria-label={`Open image: ${alt}`}
+	data-lightbox-src={src}
+	data-lightbox-alt={alt}
+>
 	<slot />
-</div>
+</button>
 
 <dialog class="lightbox" data-lightbox-modal>
 	<div class="lightbox-overlay"></div>
@@ -23,7 +29,15 @@ const { src, alt } = Astro.props;
 
 <style>
 	.lightbox-trigger {
-		cursor: pointer;
+		appearance: none;
+		background: transparent;
+		border: 0;
+		color: inherit;
+		cursor: zoom-in;
+		display: block;
+		padding: 0;
+		text-align: inherit;
+		width: 100%;
 	}
 
 	.lightbox {
@@ -142,13 +156,6 @@ const { src, alt } = Astro.props;
 					this.openLightbox(trigger as HTMLElement);
 				});
 
-				trigger.addEventListener('keydown', (e: KeyboardEvent) => {
-					if (e.key === 'Enter' || e.key === ' ') {
-						e.preventDefault();
-						e.stopPropagation();
-						this.openLightbox(trigger as HTMLElement);
-					}
-				});
 			});
 
 			const closeButtons = document.querySelectorAll('[data-lightbox-close]');

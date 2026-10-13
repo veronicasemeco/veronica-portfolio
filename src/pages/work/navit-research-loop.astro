@@ -14,7 +14,8 @@ import SiteHeader from "../../components/SiteHeader.astro";
 
 <Layout
 	title="Building NAVIT’s First Research Loop | Veronica Semeco"
-	description="Case study by Veronica Semeco on building NAVIT's first research loop."
+	description="How I built NAVIT’s lightweight monthly research loop to connect user feedback, support signals, and product decisions."
+	socialImage="/images/navit-research/navit-research-hero.png"
 >
 	<div class="page">
 		<SiteHeader current="work" />
@@ -23,6 +24,9 @@ import SiteHeader from "../../components/SiteHeader.astro";
 				kicker="Building"
 				title="NAVIT’s first research loop"
 				imagePath="/images/navit-research/navit-research-hero.png"
+				imageAlt="Diagram of NAVIT’s monthly research process from user feedback through synthesis to product decisions."
+				imageWidth={3000}
+				imageHeight={1050}
 			/>
 
 			<section class="intro">
@@ -116,6 +120,7 @@ paragraphs={[
 ]}
 				
 					imagePath="/images/navit-research/navit-research-loop-diagram.png"
+					imageAlt="Diagram connecting NPS, Support, Customer Success, and new-joiner feedback to theme grouping."
 				/>
 				<KeyDecision
 					number={2}
@@ -125,6 +130,7 @@ paragraphs={[
 	"Users could choose a 30-minute call or async email feedback. Calls were recorded and summarized with AI-assisted notes, then manually reviewed and grouped into themes so the findings kept context, nuance, and product relevance.",
 ]}
 					imagePath="/images/navit-research/navit-research-outreach-flow.png"
+					imageAlt="Research outreach flow from selecting users to interview or async feedback."
 				>
 					<Callout
 	slot="callout"
@@ -139,6 +145,7 @@ paragraphs={[
 	"When useful, I added lightweight charts, quotes, screenshots, or examples so the team could understand the pattern quickly and connect it to specific flows such as onboarding, ticket pricing, allocation, or benefit value.",
 ]}					
 					imagePath="/images/navit-research/navit-research-monthly-insights.png"
+					imageAlt="Example monthly research readout summarizing themes and product insights."
 				/>
 				<KeyDecision
 					number={4}
@@ -149,6 +156,7 @@ paragraphs={[
 	"I also ran short usability tests with new joiners during their first days at the company. These sessions helped surface first-time-user issues while also giving new teammates hands-on product onboarding.",
 ]}
 					imagePath="/images/navit-research/navit-research-internal-feedback-loop.png"
+					imageAlt="Feedback loop connecting Product, Support, Customer Success, and user research."
 				/>
 			</section>
 
