@@ -5,12 +5,13 @@ interface Props {
 	number: number;
 	title: string;
 	paragraphs: string[];
-	imagePath: string;
-	imageAlt: string;
+	imagePath?: string;
+	imageAlt?: string;
 }
 
 const { number, title, paragraphs, imagePath, imageAlt } = Astro.props;
-const mediaItems = [{ src: imagePath, alt: imageAlt }];
+const hasMediaSlot = Astro.slots.has("media");
+const mediaItems = [{ src: imagePath ?? "", alt: imageAlt ?? "" }];
 ---
 
 <article class="key-decision">
@@ -23,17 +24,21 @@ const mediaItems = [{ src: imagePath, alt: imageAlt }];
 		<slot name="callout" />
 	</div>
 	<div class="decision-media" aria-label={`${title} media`}>
-		{mediaItems.map((item) => (
-			item.src ? (
-				<Lightbox src={item.src} alt={item.alt}>
-					<img class="decision-image image-reveal" src={item.src} alt={item.alt} loading="lazy" />
-				</Lightbox>
-			) : (
-				<div class="decision-image placeholder" role="img" aria-label={`${item.alt}. Intended image path: ${item.src}`}>
-					<span>Image placeholder</span>
-				</div>
-			)
-		))}
+		{hasMediaSlot ? (
+			<slot name="media" />
+		) : (
+			mediaItems.map((item) => (
+				item.src ? (
+					<Lightbox src={item.src} alt={item.alt}>
+						<img class="decision-image image-reveal" src={item.src} alt={item.alt} loading="lazy" />
+					</Lightbox>
+				) : (
+					<div class="decision-image placeholder" role="img" aria-label={`${item.alt}. Intended image path: ${item.src}`}>
+						<span>Image placeholder</span>
+					</div>
+				)
+			))
+		)}
 	</div>
 </article>
 

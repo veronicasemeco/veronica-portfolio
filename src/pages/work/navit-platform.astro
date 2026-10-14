@@ -5,6 +5,7 @@ import CaseStudyHero from "../../components/CaseStudyHero.astro";
 import CaseStudyMeta from "../../components/CaseStudyMeta.astro";
 import ImpactMetrics from "../../components/ImpactMetrics.astro";
 import ImageBlock from "../../components/ImageBlock.astro";
+import ImageCarousel from "../../components/ImageCarousel.astro";
 import KeyDecision from "../../components/KeyDecision.astro";
 import ResultCards from "../../components/ResultCards.astro";
 import CaseStudyNextLink from "../../components/CaseStudyNextLink.astro";
@@ -185,10 +186,34 @@ import SiteHeader from "../../components/SiteHeader.astro";
 							"As NAVIT expanded, one-off UI patterns became harder to maintain. New products like Deutschlandticket, eBike subscriptions, and Bike Leasing added more rules, more states, and more edge cases.",
 							"Together with Product Designer Afra Saneinejad and Engineering, I helped create NAVIT’s first shared Figma library and align components with MUI implementation. The goal was not only visual consistency, but reusable patterns for repeated states, product rules, and handoff.",
 						]}
-						
-						imagePath="/images/navit/navit-design-system-audit.png"
-						imageAlt="Audit of NAVIT interface components and design-system inconsistencies."
-					/>
+					>
+						<ImageCarousel
+							slot="media"
+							label="NAVIT design system images"
+							images={[
+								{
+									src: "/images/navit/navit-design-system-audit.png",
+									alt: "NAVIT design system audit showing UI inconsistencies and repeated interface patterns.",
+								},
+								{
+									src: "/images/navit/navit-design-system-cards.png",
+									alt: "NAVIT reusable card components for mobility products and benefit information.",
+								},
+								{
+									src: "/images/navit/navit-design-system-colors.png",
+									alt: "NAVIT design system color foundations for hierarchy, states, and UI feedback.",
+								},
+								{
+									src: "/images/navit/navit-design-system-products.png",
+									alt: "NAVIT product UI patterns applied across different mobility benefits.",
+								},
+								{
+									src: "/images/navit/navit-design-system-type2.png",
+									alt: "NAVIT typography update showing improved readability for dense product flows.",
+								},
+							]}
+						/>
+					</KeyDecision>
 				</section>
 
 				<section class="additional section--ruled">

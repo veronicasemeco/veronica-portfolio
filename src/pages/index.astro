@@ -26,8 +26,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 					<div class="hero-scroll-content">
 						<p>Complex products need more than good screens.</p>
 						<p>
-							The most challenging product work isn't usually visual. It's making sense of competing constraints, unclear requirements, stakeholder priorities, technical realities, and user needs.
-						</p>
+							They need to work for the people using them, make sense for the business, and account for the realities of how they're built. That's not always straightforward when requirements are still taking shape, priorities change, and teams need to move fast.</p>
 					</div>
 				</section>
 
@@ -54,14 +53,36 @@ import SiteHeader from "../components/SiteHeader.astro";
 						imagePath="/images/homepage/haisa-hero.png"
 						tags={["E-commerce Strategy", "UX", "IA", "Product Data", "Shopify"]}
 					/>
-					<ProjectCard
-						title="Earlier work"
-						description="Earlier brand, web, and product work from agency, freelance, and startup projects."
-						href="https://veronica-semeco.squarespace.com/earlier-work"
-						target="_blank"
-						rel="noopener noreferrer"
-					/>
 				</div>
+
+				<section class="earlier-work section--ruled" aria-labelledby="earlier-work-title">
+					<div class="earlier-work-inner">
+						<h2 id="earlier-work-title" class="display">Earlier work</h2>
+						<ul class="earlier-work-list">
+							<li>
+								<a class="archive-row-link" href="https://veronica-semeco.squarespace.com/formel-skin-conversion-funnel" target="_blank" rel="noopener noreferrer">
+									FORMEL Skin Conversion Funnel <span aria-hidden="true">→</span>
+								</a>
+							</li>
+							<li>
+								<a class="archive-row-link" href="https://veronica-semeco.squarespace.com/formelskin2" target="_blank" rel="noopener noreferrer">
+									FORMEL Skin Onboarding <span aria-hidden="true">→</span>
+								</a>
+							</li>
+							<li>
+								<a class="archive-row-link" href="https://veronica-semeco.squarespace.com/ai-assisted-product-design-sprint" target="_blank" rel="noopener noreferrer">
+									AI-Assisted Product Design Sprint <span aria-hidden="true">→</span>
+								</a>
+							</li>
+							<li>
+								<a class="archive-row-link" href="https://veronica-semeco.squarespace.com/more-case-studies" target="_blank" rel="noopener noreferrer">
+									Earlier visual archive <span aria-hidden="true">→</span>
+								</a>
+							</li>
+						</ul>
+						<p class="earlier-work-note">More relevant samples available upon request.</p>
+					</div>
+				</section>
 
 				<section id="about" class="what-i-bring" aria-labelledby="what-i-bring-title">
 					<div class="what-i-bring-inner">
@@ -182,6 +203,84 @@ import SiteHeader from "../components/SiteHeader.astro";
 		max-width: 70.75rem;
 	}
 
+	.earlier-work {
+		padding: var(--layout-section-y) var(--layout-page-padding);
+	}
+
+	.earlier-work-inner {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-8);
+	}
+
+	.earlier-work h2 {
+		font-size: var(--text-l);
+	}
+
+	.earlier-work-list {
+		border-top: 0.5px solid var(--color-line-secondary);
+		display: flex;
+		flex-direction: column;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.earlier-work-list li {
+		border-bottom: 0.5px solid var(--color-line-secondary);
+	}
+
+	.earlier-work-list .archive-row-link {
+		align-items: center;
+		background-color: transparent;
+		background-image: none;
+		color: var(--color-text-headline);
+		display: flex;
+		font-family: var(--font-display);
+		font-size: var(--text-m);
+		gap: var(--space-3);
+		justify-content: flex-start;
+		line-height: var(--leading-tight);
+		padding: var(--space-5) var(--space-4);
+		text-decoration: none;
+		transition: background-color 180ms ease-in-out, color 180ms ease-in-out;
+		width: 100%;
+	}
+
+	.earlier-work-list .archive-row-link span {
+		transition: transform 180ms ease-in-out;
+	}
+
+	.earlier-work-list .archive-row-link:focus-visible span {
+		transform: translateX(var(--space-2));
+	}
+
+	.earlier-work-list .archive-row-link:focus-visible {
+		background-color: var(--color-button-bg-primary);
+		background-image: none;
+		color: var(--color-button-label-primary);
+		outline: 2px solid var(--color-button-bg-primary);
+		outline-offset: var(--space-2);
+	}
+
+	.earlier-work-note {
+		color: var(--color-text-secondary);
+		font-size: var(--text-s);
+		line-height: var(--leading-ui);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.earlier-work-list .archive-row-link:hover {
+			background-color: var(--color-button-bg-primary);
+			background-image: none;
+			color: var(--color-button-label-primary);
+		}
+
+		.earlier-work-list .archive-row-link:hover span {
+			transform: translateX(var(--space-2));
+		}
+	}
+
 	.what-i-bring {
 		background: var(--color-surface-primary);
 		color: var(--color-text-primary);
@@ -263,6 +362,15 @@ import SiteHeader from "../components/SiteHeader.astro";
 		.what-i-bring-inner > * {
 			transition: none;
 		}
+
+		.earlier-work-list .archive-row-link {
+			transition: none;
+		}
+
+		.earlier-work-list .archive-row-link span {
+			transform: none;
+			transition: none;
+		}
 	}
 
 	@media (max-width: 760px) {
@@ -288,6 +396,12 @@ import SiteHeader from "../components/SiteHeader.astro";
 	@media (max-width: 768px) {
 		.hero-statement {
 			animation-delay: 1550ms;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.earlier-work h2 {
+			font-size: var(--text-mobile-card-title);
 		}
 	}
 </style>

@@ -1,0 +1,167 @@
+---
+import Lightbox from "./Lightbox.astro";
+
+interface ImageItem {
+	src: string;
+	alt: string;
+}
+
+interface Props {
+	images: ImageItem[];
+	label: string;
+}
+
+const { images, label } = Astro.props;
+---
+
+<section class="image-carousel" role="region" aria-roledescription="carousel" aria-label={label} data-image-carousel>
+	<div class="image-carousel__slides">
+		{images.map((image, index) => (
+			<div
+				class="image-carousel__slide"
+				role="group"
+				aria-roledescription="slide"
+				aria-label={`${index + 1} of ${images.length}`}
+				data-carousel-slide
+				hidden={index !== 0}
+			>
+				<Lightbox src={image.src} alt={image.alt}>
+					<img
+						class="image-carousel__image"
+						src={image.src}
+						alt={image.alt}
+						loading={index === 0 ? "eager" : "lazy"}
+					/>
+				</Lightbox>
+			</div>
+		))}
+	</div>
+	<div class="image-carousel__controls" role="group" aria-label="Carousel controls">
+		<button type="button" aria-label="Previous image" data-carousel-previous disabled>
+			<span aria-hidden="true">←</span>
+		</button>
+		<p class="image-carousel__status" aria-live="polite" aria-atomic="true" data-carousel-status>
+			1 / {images.length}
+		</p>
+		<button type="button" aria-label="Next image" data-carousel-next>
+			<span aria-hidden="true">→</span>
+		</button>
+	</div>
+</section>
+
+<style>
+	.image-carousel {
+		width: 100%;
+	}
+
+	.image-carousel__slide[hidden] {
+		display: none;
+	}
+
+	.image-carousel__image {
+		border-radius: 8px;
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+
+	.image-carousel__controls {
+		align-items: center;
+		display: flex;
+		gap: var(--space-4);
+		justify-content: center;
+		padding-top: var(--space-4);
+	}
+
+	.image-carousel__controls button {
+		align-items: center;
+		appearance: none;
+		background: transparent;
+		border: 1px solid var(--color-line-secondary);
+		border-radius: 50%;
+		color: var(--color-text-headline);
+		cursor: pointer;
+		display: flex;
+		font: inherit;
+		height: 44px;
+		justify-content: center;
+		padding: 0;
+		transition: background-color 180ms ease-in-out, color 180ms ease-in-out, border-color 180ms ease-in-out;
+		width: 44px;
+	}
+
+	.image-carousel__controls button:hover:not(:disabled) {
+		background: var(--color-button-bg-primary);
+		border-color: var(--color-button-bg-primary);
+		color: var(--color-button-label-primary);
+	}
+
+	.image-carousel__controls button:focus-visible {
+		outline: 2px solid var(--color-button-bg-primary);
+		outline-offset: 2px;
+	}
+
+	.image-carousel__controls button:disabled {
+		color: var(--color-text-tertiary);
+		cursor: not-allowed;
+		opacity: 0.55;
+	}
+
+	.image-carousel__status {
+		color: var(--color-text-secondary);
+		font-size: var(--text-xs);
+		line-height: var(--leading-tight);
+		min-width: 3.5em;
+		text-align: center;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.image-carousel__controls button {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	function initializeImageCarousels() {
+		document.querySelectorAll<HTMLElement>("[data-image-carousel]").forEach((carousel) => {
+			if (carousel.dataset.carouselReady === "true") return;
+			carousel.dataset.carouselReady = "true";
+
+			const slides = Array.from(carousel.querySelectorAll<HTMLElement>("[data-carousel-slide]"));
+			const previousButton = carousel.querySelector<HTMLButtonElement>("[data-carousel-previous]");
+			const nextButton = carousel.querySelector<HTMLButtonElement>("[data-carousel-next]");
+			const status = carousel.querySelector<HTMLElement>("[data-carousel-status]");
+
+			if (!slides.length || !previousButton || !nextButton || !status) return;
+
+			let activeIndex = 0;
+			const updateCarousel = () => {
+				slides.forEach((slide, index) => {
+					slide.hidden = index !== activeIndex;
+				});
+				previousButton.disabled = activeIndex === 0;
+				nextButton.disabled = activeIndex === slides.length - 1;
+				status.textContent = `${activeIndex + 1} / ${slides.length}`;
+			};
+
+			previousButton.addEventListener("click", () => {
+				activeIndex -= 1;
+				updateCarousel();
+			});
+			nextButton.addEventListener("click", () => {
+				activeIndex += 1;
+				updateCarousel();
+			});
+			updateCarousel();
+		});
+	}
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initializeImageCarousels, { once: true });
+	} else {
+		initializeImageCarousels();
+	}
+
+	document.addEventListener("astro:after-swap", initializeImageCarousels);
+</script>
