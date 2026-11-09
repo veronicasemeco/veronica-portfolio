@@ -10,6 +10,26 @@
       "source": "/navit-app-overhaul",
       "destination": "/work/navit-platform/",
       "statusCode": 301
+    },
+    {
+      "source": "/about",
+      "destination": "/about/",
+      "statusCode": 301
+    },
+    {
+      "source": "/work/navit-platform",
+      "destination": "/work/navit-platform/",
+      "statusCode": 301
+    },
+    {
+      "source": "/work/navit-research-loop",
+      "destination": "/work/navit-research-loop/",
+      "statusCode": 301
+    },
+    {
+      "source": "/work/haisabikini",
+      "destination": "/work/haisabikini/",
+      "statusCode": 301
     }
   ]
 }
