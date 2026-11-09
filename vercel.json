@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/navit-app-overhaul",
+      "destination": "/work/navit-platform/",
+      "statusCode": 301
+    }
+  ]
+}
