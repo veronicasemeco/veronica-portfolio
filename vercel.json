@@ -30,6 +30,16 @@
       "source": "/work/haisabikini",
       "destination": "/work/haisabikini/",
       "statusCode": 301
+    },
+    {
+      "source": "/more-case-studies/interhome",
+      "destination": "https://veronica-semeco.squarespace.com/more-case-studies/interhome",
+      "statusCode": 301
+    },
+    {
+      "source": "/more-case-studies/interhome/",
+      "destination": "https://veronica-semeco.squarespace.com/more-case-studies/interhome",
+      "statusCode": 301
     }
   ]
 }
